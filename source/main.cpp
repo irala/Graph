@@ -5,10 +5,10 @@
 using std::cin;
 using std::cout;
 
+
 int main()
 {
-
-    graph gr;
+    graph<int> gr;
     int number_nodes;
     cout << "Please enter a number of nodes do you want to make: ";
     cin >> number_nodes;

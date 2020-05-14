@@ -1,4 +1,7 @@
 crear un algoritmo que devuelva la ruta más corta
 como parametro origen y destino 
 
+crear un algoritmo que devuelva la ruta más rapida
+como parametro origen y destino 
+
 hacer todo genérico
