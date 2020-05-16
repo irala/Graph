@@ -18,7 +18,6 @@ int main()
     {
         gr.make_node(i);
     }
-
     gr.add_edge(1, 2, 1);
     gr.add_edge(1, 3, 2);
     gr.add_edge(2, 3, 2);
@@ -26,6 +25,6 @@ int main()
     gr.add_edge(4, 5, 1);
     gr.add_edge(5, 1, 1);
 
-    gr.shortest_way(1, 3);
+    auto path = gr.find_shortest_path(1, 3);
     return 0;
 }

@@ -2,11 +2,13 @@
 #define GRAPH_H
 #include <iostream>
 #include <map>
+#include <vector>
 
 using std::cout;
 using std::endl;
 
 using std::map;
+using std::vector;
 
 //forward declarations
 template <typename T>
@@ -43,7 +45,7 @@ public:
 
     void make_node(T value);
 
-    void shortest_way(T origin, T destination);
+    vector<node<T>*>  find_shortest_path(T origin, T destination);
 
 private:
     //the owner of the nodes is graph
@@ -69,18 +71,19 @@ graph<T>::~graph()
 
 //algoritmo para que devuelva la ruta más corta
 template <typename T>
-void graph<T>::shortest_way(T origin, T destination)
+vector<node<T>*> graph<T>::find_shortest_path(T origin, T destination)
 {
     cout << "Find the sortest way wiht : -origin:" << origin << " -destination:" << destination << "\n";
+    //
     //iterar el mapa de nodes para ir recorriendo
     for (auto &element : nodes)
     {
-       //filtrar solo por los que tienen el origen igual que el que estamos buscando        
         for (auto &e : element.second->edges)
         {
 
-            cout<<"Edge: "<<"\n";
-            cout <<"Node origen: " <<element.second->value << " Node destination:" << e.first << "\n";
+            cout << "Edge: "
+                 << "\n";
+            cout << "Node origen: " << element.second->value << " Node destination:" << e.first << "\n";
         }
     }
 }
