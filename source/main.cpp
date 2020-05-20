@@ -19,8 +19,8 @@ int main()
         gr.make_node(i);
     }
     gr.add_edge(1, 2, 1);
-    gr.add_edge(1, 3, 2);
     gr.add_edge(2, 3, 2);
+    gr.add_edge(1, 5, 2);
     gr.add_edge(3, 4, 1);
     gr.add_edge(4, 5, 1);
     gr.add_edge(5, 1, 1);

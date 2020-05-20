@@ -45,7 +45,7 @@ public:
 
     void make_node(T value);
 
-    vector<node<T>*>  find_shortest_path(T origin, T destination);
+    vector<vector<node<T> *>> find_shortest_path(T origin, T destination);
 
 private:
     //the owner of the nodes is graph
@@ -71,21 +71,60 @@ graph<T>::~graph()
 
 //algoritmo para que devuelva la ruta más corta
 template <typename T>
-vector<node<T>*> graph<T>::find_shortest_path(T origin, T destination)
+vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
 {
-    cout << "Find the sortest way wiht : -origin:" << origin << " -destination:" << destination << "\n";
-    //
-    //iterar el mapa de nodes para ir recorriendo
-    for (auto &element : nodes)
+    //vector de vectores para retornar con los caminos posibles
+    vector<vector<node<T> *>> vector_path;
+    //entero para ir guardando el origin actual
+    vector<node<T> *> vector_nodes;
+    int current_origin = origin;
+    cout << "Find the sortest way with : -origin:" << origin << " -destination:" << destination << "\n";
+    if (nodes.find(origin) != nodes.end() && nodes.find(destination) != nodes.end())
     {
-        for (auto &e : element.second->edges)
+        cout << "find origin " << origin << " \n";
+        vector_nodes.push_back(nodes[origin]);
+        auto &edges = nodes[origin]->edges;
+        if (edges.find(destination) != edges.end())
         {
-
-            cout << "Edge: "
-                 << "\n";
-            cout << "Node origen: " << element.second->value << " Node destination:" << e.first << "\n";
+            cout << "find destination to the first time :" << destination << " \n";
+            vector_nodes.push_back(nodes[destination]);
         }
+        else
+        {
+            for (auto &e : edges)
+            {
+                current_origin = e.first;
+                if (edges.find(current_origin) != edges.end() && edges.find(destination) != edges.end())
+                {
+                    vector_nodes.push_back(nodes[current_origin]);
+                    if (edges.find(destination) != edges.end())
+                    {
+                        cout << "find destination " << destination << " \n";
+                        vector_nodes.push_back(nodes[destination]);
+                    }
+                }
+            }
+        }
+        vector_path.push_back(vector_nodes);
     }
+    else
+    {
+        return vector_path;
+    }
+    //
+    //iterar el mapa de nodes para ir recorriendo y mostrar nodes y edges
+    // for (auto &element : nodes)
+    // {
+    //     for (auto &e : element.second->edges)
+    //     {
+
+    //         cout << "Edge: "
+    //              << "\n";
+    //         cout << "Node origen: " << element.second->value << " Node destination:" << e.first << "\n";
+    //     }
+    // }
+
+    return vector_path;
 }
 
 template <typename T>
