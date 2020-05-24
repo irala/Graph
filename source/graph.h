@@ -160,6 +160,7 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
                     {
                         cout << "find destination: " << destination << " \n";
                         vector_nodes.push_back(nodes[destination]);
+                        break;
                     }
                     else{
 
