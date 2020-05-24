@@ -7,24 +7,38 @@ using std::cout;
 
 int main()
 {
-    graph<int> gr; //memoria en stack
+    graph<string> gr; //memoria en stack
 
     //graph<int>* gr2= new graph<int>();//memoria en heap
 
-    int number_nodes;
-    cout << "Please enter a number of nodes do you want to make: ";
-    cin >> number_nodes;
-    for (int i = 1; i <= number_nodes; i++)
-    {
-        gr.make_node(i);
-    }
-    gr.add_edge(1, 2, 1);
-    gr.add_edge(2, 3, 2);
-    gr.add_edge(1, 5, 2);
-    gr.add_edge(3, 4, 1);
-    gr.add_edge(4, 5, 1);
-    gr.add_edge(5, 1, 1);
+    //int number_nodes;
+    //cout << "Please enter a number of nodes do you want to make: ";
+    //cin >> number_nodes;
+    //for (int i = 1; i <= number_nodes; i++)
+    //{
+        gr.make_node("Madrid");
+        gr.make_node("Barcelona");
+        gr.make_node("Asturias");
+        gr.make_node("Malaga");
+        gr.make_node("Cadiz");
+        gr.make_node("Toledo");
+        gr.make_node("Valencia");
+  //  }
+    gr.add_edge("Madrid", "Toledo", 1);
+    gr.add_edge("Toledo", "Valencia", 2);
+    gr.add_edge("Valencia", "Barcelona", 2);
+    gr.add_edge("Madrid", "Asturias", 1);
+    gr.add_edge("Toledo", "Cadiz", 1);
+    gr.add_edge("Toledo", "Malaga",1);
+    gr.add_edge("Malaga", "Cadiz",1);
 
-    auto path = gr.find_shortest_path(1, 3);
+    auto path = gr.find_shortest_path("Madrid","Valencia");
+    for (auto &p : path)
+    {
+        for (auto &a : p)
+        {
+            cout << "Node: " << a->value << endl;
+        }
+    }
     return 0;
 }

@@ -9,6 +9,7 @@ using std::endl;
 
 using std::map;
 using std::vector;
+using std::string;
 
 //forward declarations
 template <typename T>
@@ -41,13 +42,13 @@ public:
     graph() = default;
     virtual ~graph();
 
-    bool add_edge(T origin, T destination, T weight);
+    bool add_edge(T origin, T destination, int weight);
 
     void make_node(T value);
 
     vector<vector<node<T> *>> find_shortest_path(T origin, T destination);
 
-    // vector<node<T> *> graph<T>::recursive_process(T origin, T destination, map<T, node<T> *> map_nodes);
+    vector<node<T> *> recursive_process(T origin, T destination, map<T, node<T> *> map_nodes);
 
 private:
     //the owner of the nodes is graph
@@ -72,44 +73,56 @@ graph<T>::~graph()
 }
 
 //método recursivo
-// template <typename T>
-// vector<node<T> *> graph<T>::recursive_process(T origin, T destination, map<T, node<T> *> map_nodes)
-// {
+template <typename T>
+vector<node<T> *> graph<T>::recursive_process(T origin, T destination, map<T, node<T> *> map_nodes)
+{
+    vector<node<T> *> vector_nodes;
 
-//     vector<node<T> *> vector_nodes;
-// if (map_nodes.find(origin) != map_nodes.end() && map_nodes.find(destination) != map_nodes.end())
-// {
-//     cout << "find origin " << origin << " \n";
-//     vector_nodes.push_back(map_nodes[origin]);
-//     auto &edges = map_nodes[origin]->edges;
-//     if (edges.find(destination) != edges.end())
-//     {
-//         cout << "find destination to the first time :" << destination << " \n";
-//         vector_nodes.push_back(nodes[destination]);
-//     }
-//     else
-//     {
-//         for (auto &e : edges)
-//         {
-//             current_origin = e.first;
-//             if (edges.find(current_origin) != edges.end() && edges.find(destination) != edges.end())
-//             {
-//                 vector_nodes.push_back(nodes[current_origin]);
-//                 if (edges.find(destination) != edges.end())
-//                 {
-//                     cout << "find destination " << destination << " \n";
-//                     vector_nodes.push_back(nodes[destination]);
-//                 }
-//             }
-//         }
-//     }
-// }
-// else
-// {
-//     return vector_nodes;
-// }
-//     return vector_nodes;
-// }
+    cout << "find origin " << origin << " \n";
+    vector_nodes.push_back(map_nodes[origin]);
+    auto &edges = map_nodes[origin]->edges;
+    if (edges.find(destination) != edges.end())
+    {
+        cout << "find destination to the first time :" << destination << " \n";
+        vector_nodes.push_back(nodes[destination]);
+    }
+    else
+    {
+        cout << "find destination " << destination << "to the other time"
+             << " \n";
+        for (auto &e : edges)
+        {
+            cout << "entra al nodo :" << e.first
+                 << " \n";
+
+            if (e.first == destination)
+            {
+                cout << "Find it --> save destination :"
+                     << " \n";
+
+                vector_nodes.push_back(map_nodes[e.first]);
+            }
+            else
+            {
+                cout << "other node" << endl;
+                vector_nodes.push_back(map_nodes[e.first]);
+                auto &current_edge = map_nodes[e.first]->edges;
+                if (current_edge.find(destination) != current_edge.end())
+                {
+                    cout << "find destination: " << destination << " \n";
+                    vector_nodes.push_back(map_nodes[destination]);
+                    break;
+                }
+                else
+                {
+                }
+            }
+        }
+    }
+
+    return vector_nodes;
+}
+
 //algoritmo para que devuelva la ruta más corta
 template <typename T>
 vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
@@ -118,9 +131,14 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
     vector<vector<node<T> *>> vector_path;
     //entero para ir guardando el origin actual
     vector<node<T> *> vector_nodes;
-    int current_origin = origin;
+    string current_origin = origin;
     cout << "Find the sortest way with : -origin:" << origin << " -destination:" << destination << "\n";
-    if (nodes.find(origin) != nodes.end() && nodes.find(destination) != nodes.end())
+    if (nodes.find(origin) == nodes.end() && nodes.find(destination) == nodes.end())
+    {
+        cout << "Not exists the nodes in the map" << endl;
+        return vector_path;
+    }
+    else
     {
         cout << "find origin " << origin << " \n";
         vector_nodes.push_back(nodes[origin]);
@@ -132,7 +150,8 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
         }
         else
         {
-            cout << "find destination " << destination << "to the other time" << " \n";
+            cout << "find destination " << destination << "to the other time"
+                 << " \n";
             for (auto &e : edges)
             {
                 current_origin = e.first;
@@ -145,11 +164,6 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
                          << " \n";
 
                     vector_nodes.push_back(nodes[current_origin]);
-                    // if (edges.find(destination) != edges.end())
-                    // {
-                    //     cout << "find destination " << destination << " \n";
-                    //     vector_nodes.push_back(nodes[destination]);
-                    // }
                 }
                 else
                 {
@@ -162,31 +176,14 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
                         vector_nodes.push_back(nodes[destination]);
                         break;
                     }
-                    else{
-
+                    else
+                    {
                     }
                 }
             }
         }
         vector_path.push_back(vector_nodes);
     }
-    else
-    {
-        return vector_path;
-    }
-    //
-    //iterar el mapa de nodes para ir recorriendo y mostrar nodes y edges
-    // for (auto &element : nodes)
-    // {
-    //     for (auto &e : element.second->edges)
-    //     {
-
-    //         cout << "Edge: "
-    //              << "\n";
-    //         cout << "Node origen: " << element.second->value << " Node destination:" << e.first << "\n";
-    //     }
-    // }
-
     return vector_path;
 }
 
@@ -199,7 +196,7 @@ void graph<T>::make_node(T value)
 }
 
 template <typename T>
-bool graph<T>::add_edge(T origin, T destination, T weight)
+bool graph<T>::add_edge(T origin, T destination, int weight)
 {
 
     //si en el map existe el nodo origin
