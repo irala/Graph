@@ -29,6 +29,7 @@ int main()
     gr.add_edge("Toledo", "Malaga", 1);
     gr.add_edge("Malaga", "Cadiz", 1);
     gr.add_edge("Caceres", "Vigo", 1);
+    gr.add_edge("Madrid", "Valencia", 1);
 
 
     auto path = gr.find_shortest_path("Madrid", "Valencia");
