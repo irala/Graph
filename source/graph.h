@@ -50,7 +50,7 @@ public:
 
     vector<vector<node<T> *>> find_shortest_path(T origin, T destination);
 
-    void recursive_process(node<T> *current, node<T> *, vector<node<T> *> &, set<node<T> *> &visited);
+    void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited);
 
 private:
     //the owner of the nodes is graph
@@ -74,11 +74,13 @@ graph<T>::~graph()
 
 //current path with be filled with all the nodes of the find path or will be empty if dont find a path
 template <typename T>
-void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<node<T> *> &current_path, set<node<T> *> &visited)
+void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<vector<node<T> *>> &paths, set<node<T> *> &visited)
 {
     if (current == destination)
     {
-        current_path.push_back(current);
+        vector<node<T> *> path = new vector<node<T> *>();
+        path.push_back(current);
+        paths.push_back(path);
         return;
     }
     for (const auto &[k, v] : current->edges)
@@ -87,11 +89,11 @@ void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<
         {
             continue;
         }
-        recursive_process(v->destination, destination, current_path, visited);
-        if (current_path.size())
+        recursive_process(v->destination, destination, paths, visited);
+        auto number_of_path=paths.size();
+        if (number_of_path )
         {
-            current_path.push_back(current);
-            return;
+            paths.push_back(current);
         }
     }
     //add current to visited
@@ -105,14 +107,14 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
     //vector de vectores para retornar con los caminos posibles
     vector<vector<node<T> *>> vector_path;
     vector<node<T> *> vector_nodes;
-    set<node<T> *> &visited;
+    set<node<T> *> visited;
     cout << "Find the sortest way with : -origin: " << origin << " -destination:" << destination << "\n";
     if (nodes.find(origin) == nodes.end() && nodes.find(destination) == nodes.end())
     {
         cout << "Not exists the nodes in the map" << endl;
         return vector_path;
     }
-    recursive_process(nodes[origin], nodes[destination], vector_nodes, visited);
+    recursive_process(nodes[origin], nodes[destination], vector_path, visited);
     for (auto &p : vector_nodes)
     {
 
