@@ -4,12 +4,14 @@
 #include <map>
 #include <vector>
 #include <set>
+#include <deque>
 
 using std::cout;
 using std::endl;
 
 using std::map;
 using std::set;
+using std::deque;
 using std::string;
 using std::vector;
 
@@ -50,7 +52,7 @@ public:
 
     vector<vector<node<T> *>> find_shortest_path(T origin, T destination);
 
-    void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited);
+    void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
 private:
     //the owner of the nodes is graph
@@ -74,30 +76,31 @@ graph<T>::~graph()
 
 //current path with be filled with all the nodes of the find path or will be empty if dont find a path
 template <typename T>
-void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<vector<node<T> *>> &paths, set<node<T> *> &visited)
+void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path)
 {
+
+    uncommited_current_path.push_back(current);
+    //TODO: check infinite recursion if some child nodes contains origin
     if (current == destination)
     {
-        vector<node<T> *> path = new vector<node<T> *>();
-        path.push_back(current);
-        paths.push_back(path);
+        vector<node<T>*> st (uncommited_current_path.begin(),uncommited_current_path.end());
+        paths.push_back(st);
+        uncommited_current_path.pop_back();
         return;
     }
+
+
     for (const auto &[k, v] : current->edges)
     {
         if (visited.find(v->destination) != visited.end())
         {
             continue;
         }
-        recursive_process(v->destination, destination, paths, visited);
-        auto number_of_path=paths.size();
-        if (number_of_path )
-        {
-            paths.push_back(current);
-        }
+        recursive_process(v->destination, destination, paths, visited, uncommited_current_path);
     }
     //add current to visited
     visited.insert(current);
+    uncommited_current_path.pop_back();
 }
 
 //algoritmo para que devuelva la ruta más corta
@@ -106,22 +109,24 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
 {
     //vector de vectores para retornar con los caminos posibles
     vector<vector<node<T> *>> vector_path;
-    vector<node<T> *> vector_nodes;
     set<node<T> *> visited;
+    deque<node<T> *> uncommited_current_path;
+
     cout << "Find the sortest way with : -origin: " << origin << " -destination:" << destination << "\n";
     if (nodes.find(origin) == nodes.end() && nodes.find(destination) == nodes.end())
     {
         cout << "Not exists the nodes in the map" << endl;
         return vector_path;
     }
-    recursive_process(nodes[origin], nodes[destination], vector_path, visited);
-    for (auto &p : vector_nodes)
+    recursive_process(nodes[origin], nodes[destination], vector_path, visited, uncommited_current_path);
+    for (auto &p : vector_path)
     {
-
-        cout << "Node: " << p->value << endl;
+        for (auto & pat : p){
+            cout << "Node: " << pat->value << endl;
+        }
+        cout << endl;
     }
 
-    vector_path.push_back(vector_nodes);
 
     return vector_path;
 }

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ -std=c++17 source/*.cpp 
+g++ -std=c++17 -g source/*.cpp 
