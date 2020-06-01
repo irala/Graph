@@ -9,9 +9,9 @@
 using std::cout;
 using std::endl;
 
+using std::deque;
 using std::map;
 using std::set;
-using std::deque;
 using std::string;
 using std::vector;
 
@@ -50,7 +50,11 @@ public:
 
     void make_node(T value);
 
-    vector<vector<node<T> *>> find_shortest_path(T origin, T destination);
+    vector<vector<node<T> *>> find_paths(T origin, T destination);
+
+    vector<node<T> *>get_shortest_path(vector<vector<node<T> *>> paths);
+
+    vector<vector<node<T> *>> get_minimun_weight(vector<vector<node<T> *>> paths);
 
     void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
@@ -83,12 +87,11 @@ void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<
     //TODO: check infinite recursion if some child nodes contains origin
     if (current == destination)
     {
-        vector<node<T>*> st (uncommited_current_path.begin(),uncommited_current_path.end());
+        vector<node<T> *> st(uncommited_current_path.begin(), uncommited_current_path.end());
         paths.push_back(st);
         uncommited_current_path.pop_back();
         return;
     }
-
 
     for (const auto &[k, v] : current->edges)
     {
@@ -105,7 +108,7 @@ void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<
 
 //algoritmo para que devuelva la ruta más corta
 template <typename T>
-vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
+vector<vector<node<T> *>> graph<T>::find_paths(T origin, T destination)
 {
     //vector de vectores para retornar con los caminos posibles
     vector<vector<node<T> *>> vector_path;
@@ -119,16 +122,45 @@ vector<vector<node<T> *>> graph<T>::find_shortest_path(T origin, T destination)
         return vector_path;
     }
     recursive_process(nodes[origin], nodes[destination], vector_path, visited, uncommited_current_path);
-    for (auto &p : vector_path)
-    {
-        for (auto & pat : p){
-            cout << "Node: " << pat->value << endl;
-        }
-        cout << endl;
-    }
 
+    // for (auto &p : vector_path)
+    // {
+    //     for (auto &pat : p)
+    //     {
+    //         cout << "Node: " << pat->value << endl;
+    //     }
+    //     cout << endl;
+    // }
 
     return vector_path;
+}
+
+template <typename T>
+vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
+{
+    int shortest = paths.max_size();
+    vector<node<T> *> shortest_path;
+    for (auto &p : paths)
+    {
+        if (p.size() < shortest)
+        {
+            shortest = p.size();
+            shortest_path = p;
+        }
+    }
+    cout <<"shortest path :"<< shortest 
+         << " size \n"
+         << endl;
+    for (auto &r : shortest_path)
+    {
+        cout << "Node: " << r->value << endl;
+    }
+    return shortest_path;
+}
+
+template <typename T>
+vector<node<T> *> graph<T>::get_minimun_weight(T origin, T destination)
+{
 }
 
 template <typename T>
