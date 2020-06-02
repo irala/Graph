@@ -38,5 +38,6 @@ int main()
     auto path = gr.find_paths("Madrid", "Valencia");
     // auto path2 = gr.find_shortest_path("Toledo", "Asturias");
     auto result = gr.get_shortest_path(path);
+    auto result1=gr.get_fastest_weight(path);
     return 0;
 }
