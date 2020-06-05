@@ -54,7 +54,7 @@ public:
 
     vector<node<T> *> get_shortest_path(vector<vector<node<T> *>> paths);
 
-    vector<node<T> *> get_fastest_weight(vector<vector<node<T> *>> paths);
+    vector<node<T> *> get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
 
     void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
@@ -159,20 +159,32 @@ vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
 }
 
 template <typename T>
-vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths)
+vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
 {
     int minimun = 0;
     vector<node<T> *> minimun_weight;
     for (auto &p : paths)
     {
-
-        for (size_t i = 0; i < 3; ++i)
+        for (size_t i = 0; i < p.size(); ++i)
         {
-            cout << "indice: " << (i + 1) << " - Nodo " << p[i]->value << '\n';
-            if(p[i+1]->edges.find("Valencia")!= p[i+1]->edges.end()){
-                cout << "hola" << endl;
+            int index = i + 1;
+            cout << "indice: " << i << " - Nodo " << p[i]->value << '\n';
+            if (index < p.size())
+            {
+                auto node_aux = p[index]->value;
+                minimun = minimun + p[i]->edges[node_aux]->weight;
+                cout << "hola indice " << index << " y node " << node_aux << "con peso " << minimun << endl;
+
+                if (p[index]->edges.find(destination) != p[index]->edges.end())
+                {
+                    auto weight_acu = p[index]->edges[destination]->weight;
+                    cout << "se encontró el destino " << destination << " en el node " << p[index]->value << " y con peso " << weight_acu << endl;
+                    minimun = minimun + weight_acu;
+                    break;
+                }
             }
         }
+        cout << "Peso total: " << minimun << endl;
         break;
     }
 

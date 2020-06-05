@@ -21,8 +21,8 @@ int main()
     gr.make_node("Vigo");
     gr.make_node("Caceres");
 
-    gr.add_edge("Madrid", "Toledo", 1);
-    gr.add_edge("Toledo", "Valencia", 2);
+    //gr.add_edge("Madrid", "Toledo", 1);
+   // gr.add_edge("Toledo", "Valencia", 2);
     gr.add_edge("Madrid", "Valencia", 4);
 
     // gr.add_edge("Valencia", "Barcelona", 2);
@@ -37,7 +37,7 @@ int main()
 
     auto path = gr.find_paths("Madrid", "Valencia");
     // auto path2 = gr.find_shortest_path("Toledo", "Asturias");
-    auto result = gr.get_shortest_path(path);
-    auto result1=gr.get_fastest_weight(path);
+    //auto result = gr.get_shortest_path(path);
+    auto result1=gr.get_fastest_weight(path,"Valencia");
     return 0;
 }
