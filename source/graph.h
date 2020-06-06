@@ -54,7 +54,7 @@ public:
 
     vector<node<T> *> get_shortest_path(vector<vector<node<T> *>> paths);
 
-    vector<node<T> *> get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
+    void get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
 
     void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
@@ -123,15 +123,6 @@ vector<vector<node<T> *>> graph<T>::find_paths(T origin, T destination)
     }
     recursive_process(nodes[origin], nodes[destination], vector_path, visited, uncommited_current_path);
 
-    // for (auto &p : vector_path)
-    // {
-    //     for (auto &pat : p)
-    //     {
-    //         cout << "Node: " << pat->value << endl;
-    //     }
-    //     cout << endl;
-    // }
-
     return vector_path;
 }
 
@@ -159,12 +150,13 @@ vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
 }
 
 template <typename T>
-vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
+void graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
 {
-    int minimun = 0;
+    map<int, vector<node<T> *>> fastests_path;
     vector<node<T> *> minimun_weight;
     for (auto &p : paths)
     {
+        int minimun = 0;
         for (size_t i = 0; i < p.size(); ++i)
         {
             int index = i + 1;
@@ -180,15 +172,19 @@ vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, 
                     auto weight_acu = p[index]->edges[destination]->weight;
                     cout << "se encontró el destino " << destination << " en el node " << p[index]->value << " y con peso " << weight_acu << endl;
                     minimun = minimun + weight_acu;
+                    fastests_path.insert({minimun, p});
                     break;
                 }
             }
         }
-        cout << "Peso total: " << minimun << endl;
-        break;
+        cout << "Total weight: " << minimun << endl;
     }
 
-    return minimun_weight;
+    cout << fastests_path.begin()->first << " Fastest weight" << endl;
+    for (auto &f : fastests_path.begin()->second)
+    {
+        cout << "Node " << f->value << endl;
+    }
 }
 
 template <typename T>
