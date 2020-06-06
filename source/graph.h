@@ -153,31 +153,25 @@ template <typename T>
 void graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
 {
     map<int, vector<node<T> *>> fastests_path;
-    vector<node<T> *> minimun_weight;
     for (auto &p : paths)
     {
         int minimun = 0;
         for (size_t i = 0; i < p.size(); ++i)
         {
             int index = i + 1;
-            cout << "indice: " << i << " - Nodo " << p[i]->value << '\n';
             if (index < p.size())
             {
                 auto node_aux = p[index]->value;
                 minimun = minimun + p[i]->edges[node_aux]->weight;
-                cout << "hola indice " << index << " y node " << node_aux << "con peso " << minimun << endl;
 
                 if (p[index]->edges.find(destination) != p[index]->edges.end())
                 {
                     auto weight_acu = p[index]->edges[destination]->weight;
-                    cout << "se encontró el destino " << destination << " en el node " << p[index]->value << " y con peso " << weight_acu << endl;
                     minimun = minimun + weight_acu;
-                    fastests_path.insert({minimun, p});
-                    break;
                 }
+                fastests_path[minimun] = p;
             }
         }
-        cout << "Total weight: " << minimun << endl;
     }
 
     cout << fastests_path.begin()->first << " Fastest weight" << endl;

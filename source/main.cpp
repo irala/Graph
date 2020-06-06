@@ -21,9 +21,9 @@ int main()
     gr.make_node("Vigo");
     gr.make_node("Caceres");
 
-    gr.add_edge("Madrid", "Toledo", 1);
-    gr.add_edge("Toledo", "Valencia", 2);
-    gr.add_edge("Madrid", "Valencia", 4);
+    gr.add_edge("Madrid", "Toledo", 2);
+    gr.add_edge("Toledo", "Valencia", 3);
+    gr.add_edge("Madrid", "Valencia", 1);
 
     // gr.add_edge("Valencia", "Barcelona", 2);
     // gr.add_edge("Madrid", "Asturias", 1);
