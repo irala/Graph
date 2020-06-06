@@ -36,8 +36,7 @@ int main()
     // gr.add_edge("Vigo", "Asturias", 1);
 
     auto path = gr.find_paths("Madrid", "Valencia");
-    // auto path2 = gr.find_shortest_path("Toledo", "Asturias");
-    //auto result = gr.get_shortest_path(path);
-    gr.get_fastest_weight(path, "Valencia");
+    auto shortest = gr.get_shortest_path(path);
+    auto fastest = gr.get_fastest_weight(path, "Valencia");
     return 0;
 }

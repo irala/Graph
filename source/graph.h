@@ -54,7 +54,7 @@ public:
 
     vector<node<T> *> get_shortest_path(vector<vector<node<T> *>> paths);
 
-    void get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
+    vector<node<T> *> get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
 
     void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
@@ -150,7 +150,7 @@ vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
 }
 
 template <typename T>
-void graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
+vector<node<T>*> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
 {
     map<int, vector<node<T> *>> fastests_path;
     for (auto &p : paths)
@@ -179,6 +179,8 @@ void graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination
     {
         cout << "Node " << f->value << endl;
     }
+
+    return fastests_path.begin()->second;
 }
 
 template <typename T>
