@@ -1,15 +1,30 @@
 #include <iostream>
 #include "graph.h"
 #include <map>
+#include <memory>
 
 using std::cin;
 using std::cout;
 
+class test_structure
+{
+
+public:
+    test_structure()
+    {
+        cout << "me construyo" << endl;
+    }
+    virtual ~test_structure()
+    {
+        cout << " me destruyo" << endl;
+    }
+};
 int main()
 {
     graph<string> gr; //memoria en stack
-
     //graph<int>* gr2= new graph<int>();//memoria en heap
+
+    unique_ptr<test_structure> test(new test_structure);
 
     gr.make_node("Madrid");
     gr.make_node("Barcelona");

@@ -5,6 +5,7 @@
 #include <vector>
 #include <set>
 #include <deque>
+#include <memory>
 
 using std::cout;
 using std::endl;
@@ -14,6 +15,7 @@ using std::map;
 using std::set;
 using std::string;
 using std::vector;
+using std::unique_ptr;
 
 //forward declarations
 template <typename T>
@@ -24,6 +26,8 @@ struct edge;
 template <typename T>
 struct node
 {
+    //using nodo= node<T> *;
+
     T value;
 
     node(T value) : value(value){};
@@ -38,6 +42,9 @@ struct edge
     node<T> *destination;
     int weight;
 };
+
+template <typename T>
+using nodo = node<T> *;
 
 template <typename T>
 class graph
@@ -150,7 +157,7 @@ vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
 }
 
 template <typename T>
-vector<node<T>*> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
+vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
 {
     map<int, vector<node<T> *>> fastests_path;
     for (auto &p : paths)
