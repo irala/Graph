@@ -10,11 +10,12 @@
 using std::cout;
 using std::endl;
 
+using std::move;
 using std::deque;
 using std::make_shared;
-using std::shared_ptr;
 using std::map;
 using std::set;
+using std::shared_ptr;
 using std::string;
 using std::vector;
 
@@ -25,27 +26,30 @@ template <typename T>
 struct edge;
 
 template <typename T>
+using node_ptr = shared_ptr<node<T>>;
+
+
+template <typename T>
+using edge_ptr = shared_ptr<edge<T>>;
+
+template <typename T>
 struct node
 {
-    //using nodo= node<T> *;
-
     T value;
 
     node(T value) : value(value){};
 
-    map<T, edge<T> *> edges;
+    map<T,edge_ptr<T>> edges;
 };
 
 template <typename T>
 struct edge
 {
-    node<T> *origin;
-    node<T> *destination;
+    node_ptr<T> origin;
+    node_ptr<T> destination;
     int weight;
 };
 
-template <typename T>
-using nodo = node<T> *;
 
 template <typename T>
 class graph
@@ -58,47 +62,36 @@ public:
 
     void make_node(T value);
 
-    vector<vector<node<T> *>> find_paths(T origin, T destination);
+    vector<vector<node_ptr<T>>> find_paths(T origin, T destination);
 
-    vector<node<T> *> get_shortest_path(vector<vector<node<T> *>> paths);
+    vector<node_ptr<T>> get_shortest_path(vector<vector<node_ptr<T>>> paths);
 
-    vector<node<T> *> get_fastest_weight(vector<vector<node<T> *>> paths, T destination);
+    vector<node_ptr<T>> get_fastest_weight(vector<vector<node_ptr<T>>> paths, T destination);
 
-    void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
-
+    void recursive_process(node_ptr<T> current, node_ptr<T> destination, vector<vector<node_ptr<T>>> &paths, set<node_ptr<T>> &visited, deque<node_ptr<T>> &uncommited_current_path);
 
 private:
     //the owner of the nodes is graph
-    map<T, node<T> *> nodes;
-    map<T, shared_ptr<node<T>>> nodes_shared;
+    map<T, node_ptr<T>> nodes;
 };
 
 /////////////////////////// .cpp
 
-
 template <typename T>
 graph<T>::~graph()
 {
-    for (auto &element : nodes)
-    {
-        for (auto &e : element.second->edges)
-        {
-            delete e.second;
-        }
-        delete element.second;
-    }
 }
 
 //current path with be filled with all the nodes of the find path or will be empty if dont find a path
 template <typename T>
-void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path)
+void graph<T>::recursive_process(node_ptr<T> current, node_ptr<T> destination, vector<vector<node_ptr<T>>> &paths, set<node_ptr<T>> &visited, deque<node_ptr<T>> &uncommited_current_path)
 {
 
     uncommited_current_path.push_back(current);
     //TODO: check infinite recursion if some child nodes contains origin
     if (current == destination)
     {
-        vector<node<T> *> st(uncommited_current_path.begin(), uncommited_current_path.end());
+        vector<node_ptr<T>> st(uncommited_current_path.begin(), uncommited_current_path.end());
         paths.push_back(st);
         uncommited_current_path.pop_back();
         return;
@@ -119,12 +112,12 @@ void graph<T>::recursive_process(node<T> *current, node<T> *destination, vector<
 
 //algoritmo para que devuelva la ruta más corta
 template <typename T>
-vector<vector<node<T> *>> graph<T>::find_paths(T origin, T destination)
+vector<vector<node_ptr<T>>> graph<T>::find_paths(T origin, T destination)
 {
     //vector de vectores para retornar con los caminos posibles
-    vector<vector<node<T> *>> vector_path;
-    set<node<T> *> visited;
-    deque<node<T> *> uncommited_current_path;
+    vector<vector<node_ptr<T>>>  vector_path;
+    set<node_ptr<T>> visited;
+    deque<node_ptr<T>> uncommited_current_path;
 
     cout << "Find the sortest way with : -origin: " << origin << " -destination:" << destination << "\n";
     if (nodes.find(origin) == nodes.end() && nodes.find(destination) == nodes.end())
@@ -138,10 +131,10 @@ vector<vector<node<T> *>> graph<T>::find_paths(T origin, T destination)
 }
 
 template <typename T>
-vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
+vector<node_ptr<T>> graph<T>::get_shortest_path(vector<vector<node_ptr<T>>> paths)
 {
     int shortest = paths.max_size();
-    vector<node<T> *> shortest_path;
+    vector<node_ptr<T>> shortest_path;
     for (auto &p : paths)
     {
         if (p.size() < shortest)
@@ -161,9 +154,9 @@ vector<node<T> *> graph<T>::get_shortest_path(vector<vector<node<T> *>> paths)
 }
 
 template <typename T>
-vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, T destination)
+vector<node_ptr<T>> graph<T>::get_fastest_weight(vector<vector<node_ptr<T>>> paths, T destination)
 {
-    map<int, vector<node<T> *>> fastests_path;
+    map<int, vector<node_ptr<T>>> fastests_path;
     for (auto &p : paths)
     {
         int minimun = 0;
@@ -197,8 +190,9 @@ vector<node<T> *> graph<T>::get_fastest_weight(vector<vector<node<T> *>> paths, 
 template <typename T>
 void graph<T>::make_node(T value)
 {
-    node<T> *nd = new node<T>(value);
-    this->nodes[value] = nd;
+    auto nd = make_shared<node<T>>(value);
+    //this->nodes[value] = move(nd);
+    this->nodes.emplace(value,nd);
 }
 
 template <typename T>
@@ -223,11 +217,12 @@ bool graph<T>::add_edge(T origin, T destination, int weight)
     }
 
     //aqui hay que crear el edge que no existe
-    edge<T> *e = new edge<T>();
+    auto e= make_shared<edge<T>>();
     e->origin = nodes[origin];
     e->destination = nodes[destination];
     e->weight = weight;
-    nodes[origin]->edges[destination] = e;
+    nodes[origin]->edges.emplace(destination,e);
+    
 
     return true;
 }
