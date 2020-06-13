@@ -11,11 +11,12 @@ using std::cout;
 using std::endl;
 
 using std::deque;
+using std::make_shared;
+using std::shared_ptr;
 using std::map;
 using std::set;
 using std::string;
 using std::vector;
-using std::unique_ptr;
 
 //forward declarations
 template <typename T>
@@ -65,12 +66,15 @@ public:
 
     void recursive_process(node<T> *current, node<T> *, vector<vector<node<T> *>> &paths, set<node<T> *> &visited, deque<node<T> *> &uncommited_current_path);
 
+
 private:
     //the owner of the nodes is graph
     map<T, node<T> *> nodes;
+    map<T, shared_ptr<node<T>>> nodes_shared;
 };
 
 /////////////////////////// .cpp
+
 
 template <typename T>
 graph<T>::~graph()
