@@ -24,7 +24,7 @@ int main()
     graph<string> gr; //memoria en stack
     //graph<int>* gr2= new graph<int>();//memoria en heap
 
-    unique_ptr<test_structure> test(new test_structure);
+    std::make_shared<test_structure>();
 
     gr.make_node("Madrid");
     gr.make_node("Barcelona");
