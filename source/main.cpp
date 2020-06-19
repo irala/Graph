@@ -58,5 +58,7 @@ int main()
     auto path = gr2.find_paths("Madrid", "Valencia");
     auto shortest = gr2.get_shortest_path(path);
     auto fastest = gr2.get_fastest_weight(path, "Valencia");
+
+    gr2.test_method();
     return 0;
 }

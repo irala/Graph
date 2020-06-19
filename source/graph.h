@@ -6,14 +6,15 @@
 #include <set>
 #include <deque>
 #include <memory>
+#include <assert.h>
 
 using std::cout;
 using std::endl;
 
-using std::move;
 using std::deque;
 using std::make_shared;
 using std::map;
+using std::move;
 using std::set;
 using std::shared_ptr;
 using std::string;
@@ -28,7 +29,6 @@ struct edge;
 template <typename T>
 using node_ptr = shared_ptr<node<T>>;
 
-
 template <typename T>
 using edge_ptr = shared_ptr<edge<T>>;
 
@@ -39,7 +39,7 @@ struct node
 
     node(T value) : value(value){};
 
-    map<T,edge_ptr<T>> edges;
+    map<T, edge_ptr<T>> edges;
 };
 
 template <typename T>
@@ -49,7 +49,6 @@ struct edge
     node_ptr<T> destination;
     int weight;
 };
-
 
 template <typename T>
 class graph
@@ -69,6 +68,8 @@ public:
     vector<node_ptr<T>> get_fastest_weight(vector<vector<node_ptr<T>>> paths, T destination);
 
     void recursive_process(node_ptr<T> current, node_ptr<T> destination, vector<vector<node_ptr<T>>> &paths, set<node_ptr<T>> &visited, deque<node_ptr<T>> &uncommited_current_path);
+
+    void test_method();
 
 private:
     //the owner of the nodes is graph
@@ -115,7 +116,7 @@ template <typename T>
 vector<vector<node_ptr<T>>> graph<T>::find_paths(T origin, T destination)
 {
     //vector de vectores para retornar con los caminos posibles
-    vector<vector<node_ptr<T>>>  vector_path;
+    vector<vector<node_ptr<T>>> vector_path;
     set<node_ptr<T>> visited;
     deque<node_ptr<T>> uncommited_current_path;
 
@@ -192,7 +193,7 @@ void graph<T>::make_node(T value)
 {
     auto nd = make_shared<node<T>>(value);
     //this->nodes[value] = move(nd);
-    this->nodes.emplace(value,nd);
+    this->nodes.emplace(value, nd);
 }
 
 template <typename T>
@@ -217,14 +218,39 @@ bool graph<T>::add_edge(T origin, T destination, int weight)
     }
 
     //aqui hay que crear el edge que no existe
-    auto e= make_shared<edge<T>>();
+    auto e = make_shared<edge<T>>();
     e->origin = nodes[origin];
     e->destination = nodes[destination];
     e->weight = weight;
-    nodes[origin]->edges.emplace(destination,e);
-    
+    nodes[origin]->edges.emplace(destination, e);
 
     return true;
 }
 
+template <typename T>
+void graph<T>::test_method()
+{
+    cout << "test_method" << endl;
+    //create graph
+    graph<T> gr;
+
+    //create nodes and edges
+
+    gr.make_node("Madrid");
+    gr.make_node("Toledo");
+    gr.make_node("Valencia");
+
+    gr.add_edge("Madrid", "Toledo", 1);
+    gr.add_edge("Toledo", "Valencia", 1);
+    gr.add_edge("Madrid", "Valencia", 3);
+
+    //call find_paths
+
+    auto path = gr.find_paths("Madrid", "Valencia");
+    auto shortest = gr.get_shortest_path(path);
+    //el vector que devuelve analizamos con el assert (con la condicion)
+    cout << shortest[0]->value << endl;
+
+    assert(shortest[0]->value ==("Toledo"));
+}
 #endif //GRAPH_H
