@@ -69,7 +69,6 @@ public:
 
     void recursive_process(node_ptr<T> current, node_ptr<T> destination, vector<vector<node_ptr<T>>> &paths, set<node_ptr<T>> &visited, deque<node_ptr<T>> &uncommited_current_path);
 
-    void test_method();
 
 private:
     //the owner of the nodes is graph
@@ -227,30 +226,7 @@ bool graph<T>::add_edge(T origin, T destination, int weight)
     return true;
 }
 
-template <typename T>
-void graph<T>::test_method()
-{
-    cout << "test_method" << endl;
-    //create graph
-    graph<T> gr;
 
-    //create nodes and edges
-
-    gr.make_node("Madrid");
-    gr.make_node("Toledo");
-    gr.make_node("Valencia");
-
-    gr.add_edge("Madrid", "Toledo", 1);
-    gr.add_edge("Toledo", "Valencia", 1);
-    gr.add_edge("Madrid", "Valencia", 3);
-
-    //call find_paths
-
-    auto path = gr.find_paths("Madrid", "Valencia");
-    auto shortest = gr.get_shortest_path(path);
-    //el vector que devuelve analizamos con el assert (con la condicion)
-    cout << shortest[0]->value << endl;
-
-    assert(shortest[0]->value ==("Toledo"));
-}
 #endif //GRAPH_H
+
+
