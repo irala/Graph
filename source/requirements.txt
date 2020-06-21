@@ -5,3 +5,17 @@ crear un algoritmo que devuelva la ruta más rapida
 como parametro origen y destino 
 
 hacer todo genérico
+
+convertir punteros a smart pointers
+
+medir rendimiento
+
+hilos
+
+test cases
+
+cambiar accesos directos de memoria a iteradores
+
+cmake
+
+meter lib
