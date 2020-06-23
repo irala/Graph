@@ -69,7 +69,6 @@ public:
 
     void recursive_process(node_ptr<T> current, node_ptr<T> destination, vector<vector<node_ptr<T>>> &paths, set<node_ptr<T>> &visited, deque<node_ptr<T>> &uncommited_current_path);
 
-
 private:
     //the owner of the nodes is graph
     map<T, node_ptr<T>> nodes;
@@ -119,7 +118,7 @@ vector<vector<node_ptr<T>>> graph<T>::find_paths(T origin, T destination)
     set<node_ptr<T>> visited;
     deque<node_ptr<T>> uncommited_current_path;
 
-    cout << "Find the sortest way with : -origin: " << origin << " -destination:" << destination << "\n";
+    cout << "Find the way with : -origin: " << origin << " -destination: " << destination << "\n";
     if (nodes.find(origin) == nodes.end() && nodes.find(destination) == nodes.end())
     {
         cout << "Not exists the nodes in the map" << endl;
@@ -160,21 +159,22 @@ vector<node_ptr<T>> graph<T>::get_fastest_weight(vector<vector<node_ptr<T>>> pat
     for (auto &p : paths)
     {
         int minimun = 0;
-        for (size_t i = 0; i < p.size(); ++i)
+        // for (size_t i = 0; i < p.size(); ++i)
+        for (auto it = p.begin(); it != p.end(); it++)
         {
-            int index = i + 1;
-            if (index < p.size())
-            {
-                auto node_aux = p[index]->value;
-                minimun = minimun + p[i]->edges[node_aux]->weight;
-
-                if (p[index]->edges.find(destination) != p[index]->edges.end())
-                {
-                    auto weight_acu = p[index]->edges[destination]->weight;
-                    minimun = minimun + weight_acu;
-                }
-                fastests_path[minimun] = p;
-            }
+            auto i = std::distance(p.begin(), it);
+            auto index = i + 1;
+             if (index < p.size())
+             {
+                 auto node_aux = p[index]->value;
+                 minimun = minimun + p[i]->edges[node_aux]->weight;
+                 if (p[index]->edges.find(destination) != p[index]->edges.end())
+                 {
+                     auto weight_acu = p[index]->edges[destination]->weight;
+                     minimun = minimun + weight_acu;
+                 }
+                 fastests_path[minimun] = p;
+             }
         }
     }
 
@@ -226,7 +226,4 @@ bool graph<T>::add_edge(T origin, T destination, int weight)
     return true;
 }
 
-
 #endif //GRAPH_H
-
-
