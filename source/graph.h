@@ -159,22 +159,20 @@ vector<node_ptr<T>> graph<T>::get_fastest_weight(vector<vector<node_ptr<T>>> pat
     for (auto &p : paths)
     {
         int minimun = 0;
-        // for (size_t i = 0; i < p.size(); ++i)
         for (auto it = p.begin(); it != p.end(); it++)
         {
             auto i = std::distance(p.begin(), it);
-            auto index = i + 1;
-             if (index < p.size())
-             {
-                 auto node_aux = p[index]->value;
-                 minimun = minimun + p[i]->edges[node_aux]->weight;
-                 if (p[index]->edges.find(destination) != p[index]->edges.end())
-                 {
-                     auto weight_acu = p[index]->edges[destination]->weight;
-                     minimun = minimun + weight_acu;
-                 }
-                 fastests_path[minimun] = p;
-             }
+            if (i+1 < p.size())
+            {
+                auto node_aux = p[i+1]->value;
+                minimun = minimun + p[i]->edges[node_aux]->weight;
+                if (p[i+1]->edges.find(destination) != p[i+1]->edges.end())
+                {
+                    auto weight_acu = p[i+1]->edges[destination]->weight;
+                    minimun = minimun + weight_acu;
+                }
+                fastests_path[minimun] = p;
+            }
         }
     }
 
