@@ -4,6 +4,11 @@
 #include <memory>
 #include <vector>
 
+#include "json.hpp"
+
+// for convenience
+using json = nlohmann::json;
+
 using std::cin;
 using std::cout;
 
@@ -61,6 +66,28 @@ void test_method()
     //el vector que devuelve analizamos con el assert (con la condicion)
     cout << shortest[0]->value << endl;
     assert(shortest[0]->value == ("Madrid"));
+
+    cout << "EXAMPLE JSON : \n"
+         << endl;
+    // create object from string literal
+    json j = "{ \"happy\": false, \"pi\": 3.141 }"_json;
+
+    std::string s = j.dump();
+    std::cout << j.dump(4) << std::endl;
+
+    json j2;
+    j2.push_back("foo");
+    j2.push_back(1);
+    j2.push_back(true);
+
+    // also use emplace_back
+    j2.emplace_back(1.78);
+
+    // iterate the array
+    for (json::iterator it = j2.begin(); it != j2.end(); ++it)
+    {
+        std::cout << *it << '\n';
+    }
 }
 
 int main()
