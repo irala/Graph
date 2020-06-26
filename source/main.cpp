@@ -4,6 +4,9 @@
 #include <memory>
 #include <vector>
 
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string.hpp>
+
 #include "json.hpp"
 
 // for convenience
@@ -25,6 +28,42 @@ public:
         cout << "me destruyo" << endl;
     }
 };
+
+void test_json()
+{
+    cout << "EXAMPLE JSON : \n"
+         << endl;
+    // create object from string literal
+    json j = "{ \"happy\": false, \"pi\": 3.141 }"_json;
+
+    std::string s = j.dump();
+    std::cout << j.dump(4) << std::endl;
+
+    json j2;
+    j2.push_back("foo");
+    j2.push_back(1);
+    j2.push_back(true);
+
+    // also use emplace_back
+    j2.emplace_back(1.78);
+
+    // iterate the array
+    for (json::iterator it = j2.begin(); it != j2.end(); ++it)
+    {
+        std::cout << *it << '\n';
+    }
+}
+
+void test_boost()
+{
+
+    string input("geeks\tfor\tgeeks");
+    vector<string> result;
+    boost::split(result, input, boost::is_any_of("\t"));
+
+    for (int i = 0; i < result.size(); i++)
+        cout << result[i] << endl;
+}
 
 void test_method()
 {
@@ -66,28 +105,6 @@ void test_method()
     //el vector que devuelve analizamos con el assert (con la condicion)
     cout << shortest[0]->value << endl;
     assert(shortest[0]->value == ("Madrid"));
-
-    cout << "EXAMPLE JSON : \n"
-         << endl;
-    // create object from string literal
-    json j = "{ \"happy\": false, \"pi\": 3.141 }"_json;
-
-    std::string s = j.dump();
-    std::cout << j.dump(4) << std::endl;
-
-    json j2;
-    j2.push_back("foo");
-    j2.push_back(1);
-    j2.push_back(true);
-
-    // also use emplace_back
-    j2.emplace_back(1.78);
-
-    // iterate the array
-    for (json::iterator it = j2.begin(); it != j2.end(); ++it)
-    {
-        std::cout << *it << '\n';
-    }
 }
 
 int main()
@@ -101,5 +118,7 @@ int main()
     delete test;
 
     test_method();
+    test_json();
+    test_boost();
     return 0;
 }
