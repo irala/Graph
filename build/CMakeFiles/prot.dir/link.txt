@@ -1,0 +1,1 @@
+/usr/bin/clang++     CMakeFiles/prot.dir/source/main.cpp.o CMakeFiles/prot.dir/source/graph.cpp.o  -o prot 
