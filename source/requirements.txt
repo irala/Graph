@@ -19,3 +19,9 @@ cambiar accesos directos de memoria a iteradores
 cmake
 
 meter lib
+
+Una cola wrapeada con mutex para evitar que los hilos se pisen
+
+Y el sistema de hilos a ser posible task based con pool
+
+Las dos cosas threads de c++ 11 y la version de boost de tasks
