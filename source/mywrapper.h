@@ -16,6 +16,10 @@ public:
     virtual ~mywrapper();
 
 private:
+    deque<int> d;
+
+    int get_deque(int get_number);
+    void set_deque(int set_number);
 };
 
 #endif //MYWRAPPER_H
