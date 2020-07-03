@@ -1,6 +1,12 @@
 #!/bin/bash
 
 git pull
+
+echo "Write your comment"
+read variable
+
 git add *
-git commit -m "add git.sh"
+git commit -m  "$variable"
+
 git push
+
