@@ -8,3 +8,5 @@ CMakeFiles/graph.dir/source/main.cpp.o: ../source/graph.h
 CMakeFiles/graph.dir/source/main.cpp.o: ../source/json.hpp
 CMakeFiles/graph.dir/source/main.cpp.o: ../source/main.cpp
 
+CMakeFiles/graph.dir/source/mywrapper.cpp.o: ../source/mywrapper.cpp
+

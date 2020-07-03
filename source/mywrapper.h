@@ -8,6 +8,7 @@ using std::deque;
 using std::endl;
 using std::string;
 
+template <typename T>
 class mywrapper
 {
 
@@ -16,13 +17,52 @@ public:
     virtual ~mywrapper();
 
 private:
-    deque<int> d;
+    deque<T> d;
 
-    int get(int get_number);
+    int get(T value);
     void removeback();
     void removefront();
-    void pushback(int set_number);
-    void pushfront(int set_number);
+    void pushback(T value);
+    void pushfront(T value);
 };
 
+
+//start .cpp
+template <typename T>
+
+int mywrapper<T>::get(T value)
+{
+    return d.at(value);
+}
+
+template <typename T>
+
+void mywrapper<T>::pushback(T value)
+{
+    d.push_back(value);
+}
+
+template <typename T>
+
+void mywrapper<T>::pushfront(T value)
+{
+    d.push_front(value);
+}
+
+template <typename T>
+
+void mywrapper<T>::removeback()
+{
+    d.pop_back();
+}
+
+template <typename T>
+
+void mywrapper<T>::removefront()
+{
+    d.pop_front();
+}
+
+
+//end .cpp
 #endif //MYWRAPPER_H

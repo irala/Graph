@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nuria/Graph/source/graph.cpp" "/home/nuria/Graph/build/CMakeFiles/graph.dir/source/graph.cpp.o"
   "/home/nuria/Graph/source/main.cpp" "/home/nuria/Graph/build/CMakeFiles/graph.dir/source/main.cpp.o"
+  "/home/nuria/Graph/source/mywrapper.cpp" "/home/nuria/Graph/build/CMakeFiles/graph.dir/source/mywrapper.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

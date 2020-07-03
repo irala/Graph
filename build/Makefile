@@ -177,6 +177,33 @@ source/main.cpp.s:
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
+source/mywrapper.o: source/mywrapper.cpp.o
+
+.PHONY : source/mywrapper.o
+
+# target to build an object file
+source/mywrapper.cpp.o:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.o
+.PHONY : source/mywrapper.cpp.o
+
+source/mywrapper.i: source/mywrapper.cpp.i
+
+.PHONY : source/mywrapper.i
+
+# target to preprocess a source file
+source/mywrapper.cpp.i:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.i
+.PHONY : source/mywrapper.cpp.i
+
+source/mywrapper.s: source/mywrapper.cpp.s
+
+.PHONY : source/mywrapper.s
+
+# target to generate assembly for a file
+source/mywrapper.cpp.s:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.s
+.PHONY : source/mywrapper.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -192,6 +219,9 @@ help:
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
+	@echo "... source/mywrapper.o"
+	@echo "... source/mywrapper.i"
+	@echo "... source/mywrapper.s"
 .PHONY : help
 
 
