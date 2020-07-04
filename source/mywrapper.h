@@ -16,18 +16,25 @@ public:
     mywrapper() = default;
     virtual ~mywrapper();
 
-private:
-    deque<T> d;
-
     int get(T value);
     void removeback();
     void removefront();
     void pushback(T value);
     void pushfront(T value);
+
+private:
+    deque<T> d;
 };
 
-
 //start .cpp
+
+
+template <typename T>
+mywrapper<T>::~mywrapper()
+{
+}
+
+
 template <typename T>
 
 int mywrapper<T>::get(T value)
@@ -62,7 +69,6 @@ void mywrapper<T>::removefront()
 {
     d.pop_front();
 }
-
 
 //end .cpp
 #endif //MYWRAPPER_H

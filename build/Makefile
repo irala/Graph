@@ -123,33 +123,6 @@ graph/fast:
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/build
 .PHONY : graph/fast
 
-source/graph.o: source/graph.cpp.o
-
-.PHONY : source/graph.o
-
-# target to build an object file
-source/graph.cpp.o:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/graph.cpp.o
-.PHONY : source/graph.cpp.o
-
-source/graph.i: source/graph.cpp.i
-
-.PHONY : source/graph.i
-
-# target to preprocess a source file
-source/graph.cpp.i:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/graph.cpp.i
-.PHONY : source/graph.cpp.i
-
-source/graph.s: source/graph.cpp.s
-
-.PHONY : source/graph.s
-
-# target to generate assembly for a file
-source/graph.cpp.s:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/graph.cpp.s
-.PHONY : source/graph.cpp.s
-
 source/main.o: source/main.cpp.o
 
 .PHONY : source/main.o
@@ -177,33 +150,6 @@ source/main.cpp.s:
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
-source/mywrapper.o: source/mywrapper.cpp.o
-
-.PHONY : source/mywrapper.o
-
-# target to build an object file
-source/mywrapper.cpp.o:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.o
-.PHONY : source/mywrapper.cpp.o
-
-source/mywrapper.i: source/mywrapper.cpp.i
-
-.PHONY : source/mywrapper.i
-
-# target to preprocess a source file
-source/mywrapper.cpp.i:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.i
-.PHONY : source/mywrapper.cpp.i
-
-source/mywrapper.s: source/mywrapper.cpp.s
-
-.PHONY : source/mywrapper.s
-
-# target to generate assembly for a file
-source/mywrapper.cpp.s:
-	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/mywrapper.cpp.s
-.PHONY : source/mywrapper.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... graph"
 	@echo "... edit_cache"
-	@echo "... source/graph.o"
-	@echo "... source/graph.i"
-	@echo "... source/graph.s"
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
-	@echo "... source/mywrapper.o"
-	@echo "... source/mywrapper.i"
-	@echo "... source/mywrapper.s"
 .PHONY : help
 
 

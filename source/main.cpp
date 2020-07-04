@@ -1,5 +1,6 @@
 #include <iostream>
 #include "graph.h"
+#include "mywrapper.h"
 #include <map>
 #include <memory>
 #include <vector>
@@ -107,9 +108,21 @@ void test_method()
     assert(shortest[0]->value == ("Madrid"));
 }
 
+void test_wrapper()
+{
+    mywrapper<int> w;
+    w.pushfront(1);
+    w.pushfront(2);
+    w.pushfront(3);
+    w.pushfront(4);
+    w.pushfront(5);
+
+    w.removefront();
+}
+
 int main()
 {
-    graph<string> gr2; //memoria en stack
+    //graph<string> gr2; //memoria en stack
     //graph<int>* gr2= new graph<int>();//memoria en heap
 
     auto smart_pointer = std::make_shared<test_structure>();
@@ -120,5 +133,6 @@ int main()
     test_method();
     test_json();
     test_boost();
+    test_wrapper();
     return 0;
 }
