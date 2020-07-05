@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/nuria/Graph/build",
+  "command": "/usr/bin/clang++-9   -I/home/nuria/Graph/external/include -I/home/nuria/Graph/build -I/home/nuria/Graph/source  -g   -std=gnu++17 -o CMakeFiles/graph.dir/source/main.cpp.o -c /home/nuria/Graph/source/main.cpp",
+  "file": "/home/nuria/Graph/source/main.cpp"
+}
+]

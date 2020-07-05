@@ -60,15 +60,15 @@ include CMakeFiles/graph.dir/flags.make
 CMakeFiles/graph.dir/source/main.cpp.o: CMakeFiles/graph.dir/flags.make
 CMakeFiles/graph.dir/source/main.cpp.o: ../source/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nuria/Graph/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/graph.dir/source/main.cpp.o"
-	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/graph.dir/source/main.cpp.o -c /home/nuria/Graph/source/main.cpp
+	/usr/bin/clang++-9  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/graph.dir/source/main.cpp.o -c /home/nuria/Graph/source/main.cpp
 
 CMakeFiles/graph.dir/source/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/graph.dir/source/main.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuria/Graph/source/main.cpp > CMakeFiles/graph.dir/source/main.cpp.i
+	/usr/bin/clang++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nuria/Graph/source/main.cpp > CMakeFiles/graph.dir/source/main.cpp.i
 
 CMakeFiles/graph.dir/source/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/graph.dir/source/main.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuria/Graph/source/main.cpp -o CMakeFiles/graph.dir/source/main.cpp.s
+	/usr/bin/clang++-9 $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nuria/Graph/source/main.cpp -o CMakeFiles/graph.dir/source/main.cpp.s
 
 # Object files for target graph
 graph_OBJECTS = \

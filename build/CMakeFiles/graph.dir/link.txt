@@ -1,1 +1,1 @@
-/usr/bin/clang++     CMakeFiles/graph.dir/source/main.cpp.o  -o graph 
+/usr/bin/clang++-9  -g   CMakeFiles/graph.dir/source/main.cpp.o  -o graph  -L/home/nuria/Graph/external/lib 

@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/nuria/Graph/build/CMakeFiles/NLOHMANN"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/CMakeFiles/NLOHMANN.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/CMakeFiles/NLOHMANN-complete.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-install.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-mkdir.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-download.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-update.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-patch.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-configure.rule"
+		},
+		{
+			"file" : "/home/nuria/Graph/build/NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"NLOHMANN"
+		],
+		"name" : "NLOHMANN"
+	}
+}

@@ -8,7 +8,7 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include "json.hpp"
+#include "nlohmann/json.hpp"
 
 // for convenience
 using json = nlohmann::json;

@@ -1,2 +1,0 @@
-/usr/bin/ar qc liblprot.a  CMakeFiles/lprot.dir/source/main.cpp.o CMakeFiles/lprot.dir/source/graph.cpp.o
-/usr/bin/ranlib liblprot.a
