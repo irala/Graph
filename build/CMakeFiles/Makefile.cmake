@@ -11,7 +11,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.13.4/CMakeCCompiler.cmake"
   "CMakeFiles/3.13.4/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.13.4/CMakeSystem.cmake"
-  "NLOHMANN-prefix/tmp/NLOHMANN-cfgcmd.txt.in"
   "/usr/share/cmake-3.13/Modules/CMakeCInformation.cmake"
   "/usr/share/cmake-3.13/Modules/CMakeCXXInformation.cmake"
   "/usr/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"
@@ -25,10 +24,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.13/Modules/Compiler/Clang-CXX.cmake"
   "/usr/share/cmake-3.13/Modules/Compiler/Clang.cmake"
   "/usr/share/cmake-3.13/Modules/Compiler/GNU.cmake"
-  "/usr/share/cmake-3.13/Modules/ExternalProject.cmake"
-  "/usr/share/cmake-3.13/Modules/FindGit.cmake"
-  "/usr/share/cmake-3.13/Modules/FindPackageHandleStandardArgs.cmake"
-  "/usr/share/cmake-3.13/Modules/FindPackageMessage.cmake"
   "/usr/share/cmake-3.13/Modules/Platform/Linux-Clang-C.cmake"
   "/usr/share/cmake-3.13/Modules/Platform/Linux-Clang-CXX.cmake"
   "/usr/share/cmake-3.13/Modules/Platform/Linux-GNU-C.cmake"
@@ -36,7 +31,6 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake-3.13/Modules/Platform/Linux-GNU.cmake"
   "/usr/share/cmake-3.13/Modules/Platform/Linux.cmake"
   "/usr/share/cmake-3.13/Modules/Platform/UnixPaths.cmake"
-  "/usr/share/cmake-3.13/Modules/RepositoryInfo.txt.in"
   )
 
 # The corresponding makefile is:
@@ -47,13 +41,10 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "NLOHMANN-prefix/src/NLOHMANN-stamp/NLOHMANN-gitinfo.txt"
-  "NLOHMANN-prefix/tmp/NLOHMANN-cfgcmd.txt"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/NLOHMANN.dir/DependInfo.cmake"
   "CMakeFiles/graph.dir/DependInfo.cmake"
   )

@@ -8,13 +8,18 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string.hpp>
 
-#include "nlohmann/json.hpp"
+#include "json.hpp"
 
 // for convenience
 using json = nlohmann::json;
 
 using std::cin;
 using std::cout;
+
+#include <thread>
+#include <mutex>
+
+std::mutex mtx;
 
 class test_structure
 {
@@ -120,19 +125,38 @@ void test_wrapper()
     w.removefront();
 }
 
+void print_block(int n, char c)
+{
+    // critical section (exclusive access to std::cout signaled by locking mtx):
+    std::lock_guard<std::mutex> lck(mtx);
+    for (int i = 0; i < n; ++i)
+    {
+        std::cout << c;
+    }
+    std::cout << '\n';
+}
+
 int main()
 {
     //graph<string> gr2; //memoria en stack
     //graph<int>* gr2= new graph<int>();//memoria en heap
 
-    auto smart_pointer = std::make_shared<test_structure>();
+    // auto smart_pointer = std::make_shared<test_structure>();
 
-    test_structure *test = new test_structure();
-    delete test;
+    // test_structure *test = new test_structure();
+    // delete test;
 
-    test_method();
-    test_json();
-    test_boost();
-    test_wrapper();
+   // test_method();
+   // test_json();
+   // test_boost();
+   // test_wrapper();
+
+    std::thread th1(print_block, 100, '*');
+    std::thread th2(print_block, 100, '$');
+    std::thread th3(print_block, 100, '&');
+    th1.join();
+    th2.join();
+    th3.join();
+
     return 0;
 }

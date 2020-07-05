@@ -65,50 +65,13 @@ CMAKE_SOURCE_DIR = /home/nuria/Graph
 CMAKE_BINARY_DIR = /home/nuria/Graph/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/NLOHMANN.dir
-
-# All Build rule for target.
-CMakeFiles/NLOHMANN.dir/all:
-	$(MAKE) -f CMakeFiles/NLOHMANN.dir/build.make CMakeFiles/NLOHMANN.dir/depend
-	$(MAKE) -f CMakeFiles/NLOHMANN.dir/build.make CMakeFiles/NLOHMANN.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nuria/Graph/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target NLOHMANN"
-.PHONY : CMakeFiles/NLOHMANN.dir/all
-
-# Include target in all.
-all: CMakeFiles/NLOHMANN.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/NLOHMANN.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuria/Graph/build/CMakeFiles 8
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/NLOHMANN.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuria/Graph/build/CMakeFiles 0
-.PHONY : CMakeFiles/NLOHMANN.dir/rule
-
-# Convenience name for target.
-NLOHMANN: CMakeFiles/NLOHMANN.dir/rule
-
-.PHONY : NLOHMANN
-
-# clean rule for target.
-CMakeFiles/NLOHMANN.dir/clean:
-	$(MAKE) -f CMakeFiles/NLOHMANN.dir/build.make CMakeFiles/NLOHMANN.dir/clean
-.PHONY : CMakeFiles/NLOHMANN.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/NLOHMANN.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/graph.dir
 
 # All Build rule for target.
-CMakeFiles/graph.dir/all: CMakeFiles/NLOHMANN.dir/all
+CMakeFiles/graph.dir/all:
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/depend
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nuria/Graph/build/CMakeFiles --progress-num=9,10 "Built target graph"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nuria/Graph/build/CMakeFiles --progress-num=1,2 "Built target graph"
 .PHONY : CMakeFiles/graph.dir/all
 
 # Include target in all.
@@ -118,7 +81,7 @@ all: CMakeFiles/graph.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/graph.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuria/Graph/build/CMakeFiles 10
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuria/Graph/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/graph.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nuria/Graph/build/CMakeFiles 0
 .PHONY : CMakeFiles/graph.dir/rule

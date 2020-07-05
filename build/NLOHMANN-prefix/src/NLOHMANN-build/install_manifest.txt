@@ -1,4 +1,0 @@
-/home/nuria/Graph/external/include/nlohmann/json.hpp
-/home/nuria/Graph/external/lib/cmake/nlohmann_json/nlohmann_jsonConfig.cmake
-/home/nuria/Graph/external/lib/cmake/nlohmann_json/nlohmann_jsonConfigVersion.cmake
-/home/nuria/Graph/external/lib/cmake/nlohmann_json/nlohmann_jsonTargets.cmake

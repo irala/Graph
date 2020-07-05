@@ -46,6 +46,8 @@ template <typename T>
 
 void mywrapper<T>::pushback(T value)
 {
+    cout << "pushback "<< value << endl;
+
     d.push_back(value);
 }
 
@@ -53,6 +55,7 @@ template <typename T>
 
 void mywrapper<T>::pushfront(T value)
 {
+    cout << "pushfront "<< value << endl;
     d.push_front(value);
 }
 
