@@ -1,5 +1,6 @@
 #!/bin/bash
 
+git status
 git pull
 
 echo "Write your comment"

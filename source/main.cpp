@@ -136,6 +136,16 @@ void print_block(int n, char c)
     std::cout << '\n';
 }
 
+void test_thread()
+{
+    std::thread th1(print_block, 100, '*');
+    std::thread th2(print_block, 100, '$');
+    std::thread th3(print_block, 100, '&');
+    th1.join();
+    th2.join();
+    th3.join();
+}
+
 int main()
 {
     //graph<string> gr2; //memoria en stack
@@ -146,17 +156,10 @@ int main()
     // test_structure *test = new test_structure();
     // delete test;
 
-   // test_method();
-   // test_json();
-   // test_boost();
-   // test_wrapper();
-
-    std::thread th1(print_block, 100, '*');
-    std::thread th2(print_block, 100, '$');
-    std::thread th3(print_block, 100, '&');
-    th1.join();
-    th2.join();
-    th3.join();
-
+    // test_method();
+    // test_json();
+    // test_boost();
+    // test_wrapper();
+    //test_thread();
     return 0;
 }

@@ -28,6 +28,9 @@ file(GLOB SOURCES
     ${PROJECT_SOURCE_DIR}/source/*.cpp
 )
 
+
+
+
 message(${SOURCES})
 add_executable (graph ${PROJECT_SOURCE_DIR}/source/main.cpp ${SOURCES} )
 ##add_dependencies(${PROJECT_NAME} NLOHMANN)
