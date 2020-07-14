@@ -34,4 +34,4 @@ file(GLOB SOURCES
 message(${SOURCES})
 add_executable (graph ${PROJECT_SOURCE_DIR}/source/main.cpp ${SOURCES} )
 ##add_dependencies(${PROJECT_NAME} NLOHMANN)
-target_link_libraries( ${PROJECT_NAME} pthread)
+target_link_libraries( ${PROJECT_NAME} pthread -lboost_system -lboost_thread)

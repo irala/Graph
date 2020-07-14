@@ -17,7 +17,7 @@ class mywrapper
 {
 
 public:
-    mywrapper() = default;
+    mywrapper() ;
     virtual ~mywrapper();
 
     int get(T value);
@@ -27,6 +27,9 @@ public:
     void pushfront(T value);
     static mywrapper &get_pool();
     boost::asio::io_service ioService;
+    boost::asio::io_service::work work;
+	boost::thread_group threadpool;
+	int threads;
 
 private:
     deque<T> d;
@@ -35,8 +38,22 @@ private:
 //start .cpp
 
 template <typename T>
+mywrapper<T>::mywrapper():work(ioService),threads(1){
+    for (size_t i = 0; i < threads ; i++)
+    {
+        threadpool.create_thread( 
+            boost::bind(&boost::asio::io_service::run, &ioService));
+    }
+    cout << "Thread Pool Created" << endl;
+
+}
+
+template <typename T>
 mywrapper<T>::~mywrapper()
 {
+     ioService.stop();
+    threadpool.join_all();
+    cout << "Thread Pool Terminated" << endl;
 }
 
 template <typename T>

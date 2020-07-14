@@ -113,6 +113,10 @@ void test_method()
     assert(shortest[0]->value == ("Madrid"));
 }
 
+void said_hello()
+{
+    cout << "hello " << endl;
+}
 void test_wrapper()
 {
     mywrapper<int> w;
@@ -122,9 +126,14 @@ void test_wrapper()
     w.pushfront(4);
     w.pushfront(5);
 
-    w.removefront();
+    w.get_pool().ioService.post(boost::bind(&said_hello));
+    for (size_t i = 0; i < 1000; i++)
+    {
+        /* code */
+        cout << i << endl;
+    }
 
-    w.get_pool().ioService.post(2);
+    w.removefront();
 }
 
 void print_block(int n, char c)
@@ -161,7 +170,7 @@ int main()
     // test_method();
     // test_json();
     // test_boost();
-    // test_wrapper();
+    test_wrapper();
     // test_thread();
 
     return 0;
