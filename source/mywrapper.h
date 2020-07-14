@@ -3,6 +3,10 @@
 #include <iostream>
 #include <deque>
 
+#include <boost/asio/io_service.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
+
 using std::cout;
 using std::deque;
 using std::endl;
@@ -21,6 +25,8 @@ public:
     void removefront();
     void pushback(T value);
     void pushfront(T value);
+    static mywrapper &get_pool();
+    boost::asio::io_service ioService;
 
 private:
     deque<T> d;
@@ -28,12 +34,17 @@ private:
 
 //start .cpp
 
-
 template <typename T>
 mywrapper<T>::~mywrapper()
 {
 }
 
+template <typename T>
+mywrapper<T> &mywrapper<T>::get_pool()
+{
+    static mywrapper<T> tp;
+    return tp;
+}
 
 template <typename T>
 
@@ -46,7 +57,7 @@ template <typename T>
 
 void mywrapper<T>::pushback(T value)
 {
-    cout << "pushback "<< value << endl;
+    cout << "pushback " << value << endl;
 
     d.push_back(value);
 }
@@ -55,7 +66,7 @@ template <typename T>
 
 void mywrapper<T>::pushfront(T value)
 {
-    cout << "pushfront "<< value << endl;
+    cout << "pushfront " << value << endl;
     d.push_front(value);
 }
 

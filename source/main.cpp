@@ -123,6 +123,8 @@ void test_wrapper()
     w.pushfront(5);
 
     w.removefront();
+
+    w.get_pool().ioService.post(2);
 }
 
 void print_block(int n, char c)
@@ -160,6 +162,7 @@ int main()
     // test_json();
     // test_boost();
     // test_wrapper();
-    //test_thread();
+    // test_thread();
+
     return 0;
 }
