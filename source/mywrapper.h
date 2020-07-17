@@ -7,6 +7,8 @@
 #include <boost/bind.hpp>
 #include <boost/thread/thread.hpp>
 
+#include <functional>
+
 using std::cout;
 using std::deque;
 using std::endl;
@@ -28,13 +30,16 @@ public:
     void said_hello();
     static mywrapper &get_pool();
     void get_ioService();
-   // boost::asio::io_service ioService;
-   // boost::asio::io_service::work work;
-   // boost::thread_group threadpool;
+    void addfunction();
+    // boost::asio::io_service ioService;
+    // boost::asio::io_service::work work;
+    // boost::thread_group threadpool;
     int threads;
 
 private:
-    deque<T> d;
+    // using  function_type=void (*myfunction)(int);
+    using function_type_m = std::function<void(int)>;
+    deque<function_type_m> d;
 };
 
 //start .cpp
@@ -118,6 +123,18 @@ template <typename T>
 void mywrapper<T>::removefront()
 {
     d.pop_front();
+}
+
+template <typename T>
+void mywrapper<T>::addfunction()
+{
+    d.push_back([](int) -> void {
+        for (size_t i = 0; i < 100; i++)
+        {
+            /* code */
+            cout << i << endl;
+        }
+    });
 }
 
 //end .cpp
