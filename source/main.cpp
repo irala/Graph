@@ -113,21 +113,19 @@ void test_method()
     assert(shortest[0]->value == ("Madrid"));
 }
 
-
 void test_wrapper()
 {
     mywrapper<int> w;
-    // w.pushfront(1);
-    // w.pushfront(2);
-    // w.pushfront(3);
-    // w.pushfront(4);
-    // w.pushfront(5);
-    // w.removefront();
-
-    w.addfunction();
-
-    //  w.get_ioService();
+    w.pushfront(1);
+    w.pushfront(2);
+    w.pushfront(3);
+    w.pushfront(4);
+    w.pushfront(5);
+    w.removefront();
+    w.get_ioService();
 }
+
+
 
 void print_block(int n, char c)
 {
@@ -163,8 +161,17 @@ int main()
     // test_method();
     // test_json();
     // test_boost();
-    test_wrapper();
+    //test_wrapper();
     // test_thread();
+
+
+    std::lock_guard<std::mutex> lck(mtx);
+    mywrapper<int> w;
+    w.addfunction();
+    std::thread first(showdq,w.d);
+    std::thread second(showdq,w.d);
+    first.join();
+    second.join();
 
     return 0;
 }

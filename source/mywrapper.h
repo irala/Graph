@@ -8,11 +8,15 @@
 #include <boost/thread/thread.hpp>
 
 #include <functional>
+#include <thread>
+#include <mutex>
 
 using std::cout;
 using std::deque;
 using std::endl;
 using std::string;
+
+using function_type_m = std::function<void()>;
 
 template <typename T>
 class mywrapper
@@ -35,11 +39,10 @@ public:
     // boost::asio::io_service::work work;
     // boost::thread_group threadpool;
     int threads;
+    deque<function_type_m> d;
 
 private:
     // using  function_type=void (*myfunction)(int);
-    using function_type_m = std::function<void(int)>;
-    deque<function_type_m> d;
 };
 
 //start .cpp
@@ -79,19 +82,19 @@ void said_hello()
 template <typename T>
 void mywrapper<T>::get_ioService()
 {
-    get_pool().ioService.post(boost::bind(&mywrapper<T>::said_hello));
-    for (size_t i = 0; i < 1000; i++)
-    {
-        /* code */
-        cout << i << endl;
-    }
+    // get_pool().ioService.post(boost::bind(&mywrapper<T>::said_hello));
+    // for (size_t i = 0; i < 1000; i++)
+    // {
+    //     /* code */
+    //     cout << i << endl;
+    // }
 }
 
 template <typename T>
 
 int mywrapper<T>::get(T value)
 {
-    return d.at(value);
+    return 0;//d.at(value);
 }
 
 template <typename T>
@@ -100,7 +103,7 @@ void mywrapper<T>::pushback(T value)
 {
     cout << "pushback " << value << endl;
 
-    d.push_back(value);
+   // d.push_back(value);
 }
 
 template <typename T>
@@ -108,7 +111,7 @@ template <typename T>
 void mywrapper<T>::pushfront(T value)
 {
     cout << "pushfront " << value << endl;
-    d.push_front(value);
+   // d.push_front(value);
 }
 
 template <typename T>
@@ -128,13 +131,27 @@ void mywrapper<T>::removefront()
 template <typename T>
 void mywrapper<T>::addfunction()
 {
-    d.push_back([](int) -> void {
+    d.push_back([]() -> void {
         for (size_t i = 0; i < 100; i++)
         {
             /* code */
             cout << i << endl;
+           // cout << "patata" ;
         }
     });
+}
+
+void showdq(deque<function_type_m> d)
+{
+
+    for (int i = 0; i < d.size(); i++)
+    {
+        d[i]();
+    
+        
+    }
+    cout << '\n'
+         << endl;
 }
 
 //end .cpp
