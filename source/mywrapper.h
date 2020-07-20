@@ -18,7 +18,6 @@ using std::string;
 
 using function_type_m = std::function<void()>;
 
-// template <typename T>
 class mywrapper
 {
 
@@ -47,7 +46,6 @@ private:
 
 //start .cpp
 
-// template <typename T>
 mywrapper::mywrapper() //: work(ioService), threads(1)
 {
     // for (size_t i = 0; i < threads; i++)
@@ -58,7 +56,6 @@ mywrapper::mywrapper() //: work(ioService), threads(1)
     // cout << "Thread Pool Created" << endl;
 }
 
-// template <typename T>
 mywrapper::~mywrapper()
 {
     // ioService.stop();
@@ -66,20 +63,17 @@ mywrapper::~mywrapper()
     // cout << "Thread Pool Terminated" << endl;
 }
 
-// template <typename T>
 mywrapper &mywrapper::get_pool()
 {
     static mywrapper tp;
     return tp;
 }
 
-// template <typename T>
 void said_hello()
 {
     cout << "hello " << endl;
 }
 
-// template <typename T>
 void mywrapper::get_ioService()
 {
     // get_pool().ioService.post(boost::bind(&mywrapper<T>::said_hello));
@@ -90,14 +84,12 @@ void mywrapper::get_ioService()
     // }
 }
 
-// template <typename T>
 
 int mywrapper::get(int value)
 {
     return 0;//d.at(value);
 }
 
-// template <typename T>
 
 void mywrapper::pushback(int value)
 {
@@ -106,7 +98,6 @@ void mywrapper::pushback(int value)
    // d.push_back(value);
 }
 
-// template <typename T>
 
 void mywrapper::pushfront(int value)
 {
@@ -114,29 +105,24 @@ void mywrapper::pushfront(int value)
    // d.push_front(value);
 }
 
-// template <typename T>
 
 void mywrapper::removeback()
 {
     d.pop_back();
 }
 
-// template <typename T>
 
 void mywrapper::removefront()
 {
     d.pop_front();
 }
 
-// template <typename T>
 void mywrapper::addfunction()
 {
     d.push_back([]() -> void {
         for (size_t i = 0; i < 100; i++)
         {
-            /* code */
             cout << i << endl;
-           // cout << "patata" ;
         }
     });
 }
