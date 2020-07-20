@@ -18,7 +18,7 @@ using std::string;
 
 using function_type_m = std::function<void()>;
 
-template <typename T>
+// template <typename T>
 class mywrapper
 {
 
@@ -26,11 +26,11 @@ public:
     mywrapper();
     virtual ~mywrapper();
 
-    int get(T value);
+    int get(int value);
     void removeback();
     void removefront();
-    void pushback(T value);
-    void pushfront(T value);
+    void pushback(int value);
+    void pushfront(int value);
     void said_hello();
     static mywrapper &get_pool();
     void get_ioService();
@@ -47,8 +47,8 @@ private:
 
 //start .cpp
 
-template <typename T>
-mywrapper<T>::mywrapper() //: work(ioService), threads(1)
+// template <typename T>
+mywrapper::mywrapper() //: work(ioService), threads(1)
 {
     // for (size_t i = 0; i < threads; i++)
     // {
@@ -58,29 +58,29 @@ mywrapper<T>::mywrapper() //: work(ioService), threads(1)
     // cout << "Thread Pool Created" << endl;
 }
 
-template <typename T>
-mywrapper<T>::~mywrapper()
+// template <typename T>
+mywrapper::~mywrapper()
 {
     // ioService.stop();
     // threadpool.join_all();
     // cout << "Thread Pool Terminated" << endl;
 }
 
-template <typename T>
-mywrapper<T> &mywrapper<T>::get_pool()
+// template <typename T>
+mywrapper &mywrapper::get_pool()
 {
-    static mywrapper<T> tp;
+    static mywrapper tp;
     return tp;
 }
 
-template <typename T>
+// template <typename T>
 void said_hello()
 {
     cout << "hello " << endl;
 }
 
-template <typename T>
-void mywrapper<T>::get_ioService()
+// template <typename T>
+void mywrapper::get_ioService()
 {
     // get_pool().ioService.post(boost::bind(&mywrapper<T>::said_hello));
     // for (size_t i = 0; i < 1000; i++)
@@ -90,46 +90,46 @@ void mywrapper<T>::get_ioService()
     // }
 }
 
-template <typename T>
+// template <typename T>
 
-int mywrapper<T>::get(T value)
+int mywrapper::get(int value)
 {
     return 0;//d.at(value);
 }
 
-template <typename T>
+// template <typename T>
 
-void mywrapper<T>::pushback(T value)
+void mywrapper::pushback(int value)
 {
     cout << "pushback " << value << endl;
 
    // d.push_back(value);
 }
 
-template <typename T>
+// template <typename T>
 
-void mywrapper<T>::pushfront(T value)
+void mywrapper::pushfront(int value)
 {
     cout << "pushfront " << value << endl;
    // d.push_front(value);
 }
 
-template <typename T>
+// template <typename T>
 
-void mywrapper<T>::removeback()
+void mywrapper::removeback()
 {
     d.pop_back();
 }
 
-template <typename T>
+// template <typename T>
 
-void mywrapper<T>::removefront()
+void mywrapper::removefront()
 {
     d.pop_front();
 }
 
-template <typename T>
-void mywrapper<T>::addfunction()
+// template <typename T>
+void mywrapper::addfunction()
 {
     d.push_back([]() -> void {
         for (size_t i = 0; i < 100; i++)

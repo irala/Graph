@@ -115,7 +115,7 @@ void test_method()
 
 void test_wrapper()
 {
-    mywrapper<int> w;
+    mywrapper w;
     w.pushfront(1);
     w.pushfront(2);
     w.pushfront(3);
@@ -166,7 +166,7 @@ int main()
 
 
     std::lock_guard<std::mutex> lck(mtx);
-    mywrapper<int> w;
+    mywrapper w;
     w.addfunction();
     std::thread first(showdq,w.d);
     std::thread second(showdq,w.d);
