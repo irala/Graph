@@ -116,11 +116,11 @@ void test_method()
 void test_wrapper()
 {
     mywrapper w;
-    w.pushfront(1);
-    w.pushfront(2);
-    w.pushfront(3);
-    w.pushfront(4);
-    w.pushfront(5);
+    // w.pushfront(1);
+    // w.pushfront(2);
+    // w.pushfront(3);
+    // w.pushfront(4);
+    // w.pushfront(5);
     w.removefront();
     w.get_ioService();
 }
@@ -165,13 +165,13 @@ int main()
     // test_thread();
 
 
-    std::lock_guard<std::mutex> lck(mtx);
-    mywrapper w;
-    w.addfunction();
-    std::thread first(showdq,w.d);
-    std::thread second(showdq,w.d);
-    first.join();
-    second.join();
+    // std::lock_guard<std::mutex> lck(mtx);
+    // mywrapper w;
+    // w.addfunction();
+    // std::thread first(showdq,w.d);
+    // std::thread second(showdq,w.d);
+    // first.join();
+    // second.join();
 
     return 0;
 }

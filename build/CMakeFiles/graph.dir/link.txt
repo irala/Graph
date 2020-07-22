@@ -1,1 +1,1 @@
-/usr/bin/clang++-9  -g   CMakeFiles/graph.dir/source/main.cpp.o  -o graph  -L/home/nuria/Graph/external/lib -Wl,-rpath,/home/nuria/Graph/external/lib -lpthread -lboost_system -lboost_thread 
+/usr/bin/clang++-9  -g   CMakeFiles/graph.dir/source/main.cpp.o CMakeFiles/graph.dir/source/taskmanager.cpp.o  -o graph  -L/home/nuria/Graph/external/lib -Wl,-rpath,/home/nuria/Graph/external/lib -lpthread -lboost_system -lboost_thread 

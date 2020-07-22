@@ -150,6 +150,33 @@ source/main.cpp.s:
 	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/main.cpp.s
 .PHONY : source/main.cpp.s
 
+source/taskmanager.o: source/taskmanager.cpp.o
+
+.PHONY : source/taskmanager.o
+
+# target to build an object file
+source/taskmanager.cpp.o:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/taskmanager.cpp.o
+.PHONY : source/taskmanager.cpp.o
+
+source/taskmanager.i: source/taskmanager.cpp.i
+
+.PHONY : source/taskmanager.i
+
+# target to preprocess a source file
+source/taskmanager.cpp.i:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/taskmanager.cpp.i
+.PHONY : source/taskmanager.cpp.i
+
+source/taskmanager.s: source/taskmanager.cpp.s
+
+.PHONY : source/taskmanager.s
+
+# target to generate assembly for a file
+source/taskmanager.cpp.s:
+	$(MAKE) -f CMakeFiles/graph.dir/build.make CMakeFiles/graph.dir/source/taskmanager.cpp.s
+.PHONY : source/taskmanager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... source/main.o"
 	@echo "... source/main.i"
 	@echo "... source/main.s"
+	@echo "... source/taskmanager.o"
+	@echo "... source/taskmanager.i"
+	@echo "... source/taskmanager.s"
 .PHONY : help
 
 

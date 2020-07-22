@@ -6,3 +6,6 @@ CMakeFiles/graph.dir/source/main.cpp.o: ../source/json.hpp
 CMakeFiles/graph.dir/source/main.cpp.o: ../source/main.cpp
 CMakeFiles/graph.dir/source/main.cpp.o: ../source/mywrapper.h
 
+CMakeFiles/graph.dir/source/taskmanager.cpp.o: ../source/taskmanager.cpp
+CMakeFiles/graph.dir/source/taskmanager.cpp.o: ../source/taskmanager.h
+

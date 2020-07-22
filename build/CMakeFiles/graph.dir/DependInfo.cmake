@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nuria/Graph/source/main.cpp" "/home/nuria/Graph/build/CMakeFiles/graph.dir/source/main.cpp.o"
+  "/home/nuria/Graph/source/taskmanager.cpp" "/home/nuria/Graph/build/CMakeFiles/graph.dir/source/taskmanager.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 

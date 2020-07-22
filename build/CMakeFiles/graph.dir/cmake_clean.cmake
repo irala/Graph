@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/graph.dir/source/main.cpp.o"
+  "CMakeFiles/graph.dir/source/taskmanager.cpp.o"
   "graph.pdb"
   "graph"
 )

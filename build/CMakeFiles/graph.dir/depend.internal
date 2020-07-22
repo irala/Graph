@@ -6,3 +6,6 @@ CMakeFiles/graph.dir/source/main.cpp.o
  /home/nuria/Graph/source/json.hpp
  /home/nuria/Graph/source/main.cpp
  /home/nuria/Graph/source/mywrapper.h
+CMakeFiles/graph.dir/source/taskmanager.cpp.o
+ /home/nuria/Graph/source/taskmanager.cpp
+ /home/nuria/Graph/source/taskmanager.h

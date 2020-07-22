@@ -25,19 +25,18 @@ public:
     mywrapper();
     virtual ~mywrapper();
 
-    int get(int value);
     void removeback();
     void removefront();
-    void pushback(int value);
-    void pushfront(int value);
-    void said_hello();
+    void pushback(function_type_m value);
+    void pushfront(function_type_m value);
+    void  methodPool();
     static mywrapper &get_pool();
     void get_ioService();
     void addfunction();
-    // boost::asio::io_service ioService;
-    // boost::asio::io_service::work work;
-    // boost::thread_group threadpool;
-    int threads;
+    //boost::asio::io_service ioService;
+    //boost::asio::io_service::work work;
+    //boost::thread_group threadpool;
+    //int threads;
     deque<function_type_m> d;
 
 private:
@@ -48,13 +47,13 @@ private:
 
 mywrapper::mywrapper() //: work(ioService), threads(1)
 {
-    // for (size_t i = 0; i < threads; i++)
-    // {
-    //     threadpool.create_thread(
-    //         boost::bind(&boost::asio::io_service::run, &ioService));
-    // }
-    // cout << "Thread Pool Created" << endl;
-}
+//     for (size_t i = 0; i < threads; i++)
+//     {
+//         threadpool.create_thread(
+//             boost::bind(&boost::asio::io_service::run, &ioService));
+//     }
+//     cout << "Thread Pool Created" << endl;
+ }
 
 mywrapper::~mywrapper()
 {
@@ -69,14 +68,14 @@ mywrapper &mywrapper::get_pool()
     return tp;
 }
 
-void said_hello()
+void methodPool()
 {
-    cout << "hello " << endl;
+    cout << "hi " << endl;
 }
 
 void mywrapper::get_ioService()
 {
-    // get_pool().ioService.post(boost::bind(&mywrapper<T>::said_hello));
+    //get_pool().ioService.post(boost::bind(&mywrapper::methodPool));
     // for (size_t i = 0; i < 1000; i++)
     // {
     //     /* code */
@@ -84,33 +83,20 @@ void mywrapper::get_ioService()
     // }
 }
 
-
-int mywrapper::get(int value)
+void mywrapper::pushback(function_type_m value)
 {
-    return 0;//d.at(value);
+    d.push_back(value);
 }
 
-
-void mywrapper::pushback(int value)
+void mywrapper::pushfront(function_type_m value)
 {
-    cout << "pushback " << value << endl;
-
-   // d.push_back(value);
+    d.push_front(value);
 }
-
-
-void mywrapper::pushfront(int value)
-{
-    cout << "pushfront " << value << endl;
-   // d.push_front(value);
-}
-
 
 void mywrapper::removeback()
 {
     d.pop_back();
 }
-
 
 void mywrapper::removefront()
 {
@@ -133,12 +119,12 @@ void showdq(deque<function_type_m> d)
     for (int i = 0; i < d.size(); i++)
     {
         d[i]();
-    
-        
     }
     cout << '\n'
          << endl;
 }
+
+
 
 //end .cpp
 #endif //MYWRAPPER_H
