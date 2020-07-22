@@ -392,12 +392,6 @@ thread
 mutex
 -
 
-/home/nuria/Graph/source/taskmanager.cpp
-iostream
--
-taskmanager.h
-/home/nuria/Graph/source/taskmanager.h
-
 /home/nuria/Graph/source/taskmanager.h
 iostream
 -

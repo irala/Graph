@@ -122,7 +122,7 @@ void test_wrapper()
     // w.pushfront(3);
     // w.pushfront(4);
     // w.pushfront(5);
-    w.removefront();
+    // w.removefront();
     w.get_ioService();
 }
 
@@ -146,14 +146,14 @@ void test_thread()
     th2.join();
     th3.join();
 }
-
-function_type_m infinite_loop_dispatcher(taskmanager &t)
+bool bye = false;
+void infinite_loop_dispatcher()
 {
-    while (true)
+    while (!bye)
     {
-        cout << "call t" << endl;
-        auto resp = t.pop_front();
-        return resp;
+        // cout << "call t" << endl;
+       auto resp = taskmanager::get_manager().pop_front();
+       resp();
     }
 }
 void something()
@@ -171,7 +171,6 @@ int main()
     // test_structure *test = new test_structure();
     // delete test;
 
-
     // std::lock_guard<std::mutex> lck(mtx);
     // mywrapper w;
     // w.addfunction();
@@ -181,18 +180,30 @@ int main()
     // second.join();
 
     //add functions in taskmanager
-    taskmanager t;
+    taskmanager & t =taskmanager::get_manager();
+     t.push_back(something);
     t.push_back(something);
     t.push_back(something);
-    t.push_back(something);
-    t.push_back(something);
-    t.push_back(something);
+    // t.push_back(something);
+    // t.push_back(something);
+
     //create threads
     const auto processor_count = std::thread::hardware_concurrency();
+    vector<std::thread*> thread_vector; 
     for (size_t i = 0; i < processor_count; i++)
     {
-        std::thread t(infinite_loop_dispatcher);
+        std::thread* th = new std::thread([]() {
+            infinite_loop_dispatcher();
+        });
+        thread_vector.push_back(th);
     }
-
+    sleep(10);
+    bye = true;
+    for (size_t i = 0; i < thread_vector.size(); i++)
+    {
+        thread_vector[i]->join();
+        delete thread_vector[i];
+    }
+    
     return 0;
 }
