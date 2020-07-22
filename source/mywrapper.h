@@ -25,11 +25,6 @@ public:
     mywrapper();
     virtual ~mywrapper();
 
-    void removeback();
-    void removefront();
-    void pushback(function_type_m value);
-    void pushfront(function_type_m value);
-    void  methodPool();
     static mywrapper &get_pool();
     void get_ioService();
     void addfunction();
@@ -83,25 +78,6 @@ void mywrapper::get_ioService()
     // }
 }
 
-void mywrapper::pushback(function_type_m value)
-{
-    d.push_back(value);
-}
-
-void mywrapper::pushfront(function_type_m value)
-{
-    d.push_front(value);
-}
-
-void mywrapper::removeback()
-{
-    d.pop_back();
-}
-
-void mywrapper::removefront()
-{
-    d.pop_front();
-}
 
 void mywrapper::addfunction()
 {

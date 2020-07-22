@@ -1,6 +1,7 @@
 #include <iostream>
 #include "graph.h"
 #include "mywrapper.h"
+#include "taskmanager.h"
 #include <map>
 #include <memory>
 #include <vector>
@@ -125,8 +126,6 @@ void test_wrapper()
     w.get_ioService();
 }
 
-
-
 void print_block(int n, char c)
 {
     // critical section (exclusive access to std::cout signaled by locking mtx):
@@ -148,6 +147,20 @@ void test_thread()
     th3.join();
 }
 
+function_type_m infinite_loop_dispatcher(taskmanager &t)
+{
+    while (true)
+    {
+        cout << "call t" << endl;
+        auto resp = t.pop_front();
+        return resp;
+    }
+}
+void something()
+{
+    cout << "hi " << endl;
+}
+
 int main()
 {
     //graph<string> gr2; //memoria en stack
@@ -158,12 +171,6 @@ int main()
     // test_structure *test = new test_structure();
     // delete test;
 
-    // test_method();
-    // test_json();
-    // test_boost();
-    //test_wrapper();
-    // test_thread();
-
 
     // std::lock_guard<std::mutex> lck(mtx);
     // mywrapper w;
@@ -172,6 +179,20 @@ int main()
     // std::thread second(showdq,w.d);
     // first.join();
     // second.join();
+
+    //add functions in taskmanager
+    taskmanager t;
+    t.push_back(something);
+    t.push_back(something);
+    t.push_back(something);
+    t.push_back(something);
+    t.push_back(something);
+    //create threads
+    const auto processor_count = std::thread::hardware_concurrency();
+    for (size_t i = 0; i < processor_count; i++)
+    {
+        std::thread t(infinite_loop_dispatcher);
+    }
 
     return 0;
 }

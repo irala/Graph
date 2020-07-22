@@ -17,8 +17,8 @@ public:
     taskmanager();
     virtual ~taskmanager();
 
-    void pushback(function_type_m f);
-    void popback();
+    void push_back(function_type_m f);
+    function_type_m pop_front();
 
 private:
     deque<function_type_m> d;
