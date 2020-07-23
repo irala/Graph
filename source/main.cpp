@@ -147,13 +147,17 @@ void test_thread()
     th3.join();
 }
 bool bye = false;
-void infinite_loop_dispatcher()
+void infinite_loop_dispatcher(int i)
 {
     while (!bye)
     {
-        // cout << "call t" << endl;
-       auto resp = taskmanager::get_manager().pop_front();
-       resp();
+
+        auto resp = taskmanager::get_manager().pop_front();
+        if (resp != nullptr)
+        {
+            resp();
+            cout << "Thread " << i << endl;
+        }
     }
 }
 void something()
@@ -180,30 +184,31 @@ int main()
     // second.join();
 
     //add functions in taskmanager
-    taskmanager & t =taskmanager::get_manager();
-     t.push_back(something);
+    taskmanager &t = taskmanager::get_manager();
     t.push_back(something);
     t.push_back(something);
-    // t.push_back(something);
-    // t.push_back(something);
+    t.push_back(something);
+    t.push_back(something);
+    t.push_back(something);
 
     //create threads
     const auto processor_count = std::thread::hardware_concurrency();
-    vector<std::thread*> thread_vector; 
+    vector<std::thread *> thread_vector;
+    std::lock_guard<std::mutex> lck(mtx);
     for (size_t i = 0; i < processor_count; i++)
     {
-        std::thread* th = new std::thread([]() {
-            infinite_loop_dispatcher();
+        std::thread *th = new std::thread([i]() {
+            infinite_loop_dispatcher(i);
         });
         thread_vector.push_back(th);
     }
-    sleep(10);
+    sleep(1);
     bye = true;
     for (size_t i = 0; i < thread_vector.size(); i++)
     {
         thread_vector[i]->join();
         delete thread_vector[i];
     }
-    
+
     return 0;
 }
