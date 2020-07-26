@@ -165,23 +165,7 @@ void something()
     cout << "hi " << endl;
 }
 
-int main()
-{
-    //graph<string> gr2; //memoria en stack
-    //graph<int>* gr2= new graph<int>();//memoria en heap
-
-    // auto smart_pointer = std::make_shared<test_structure>();
-
-    // test_structure *test = new test_structure();
-    // delete test;
-
-    // std::lock_guard<std::mutex> lck(mtx);
-    // mywrapper w;
-    // w.addfunction();
-    // std::thread first(showdq,w.d);
-    // std::thread second(showdq,w.d);
-    // first.join();
-    // second.join();
+void send_threads() {
 
     //add functions in taskmanager
     taskmanager &t = taskmanager::get_manager();
@@ -210,5 +194,26 @@ int main()
         delete thread_vector[i];
     }
 
-    return 0;
+}
+
+int main()
+{
+    //graph<string> gr2; //memoria en stack
+    //graph<int>* gr2= new graph<int>();//memoria en heap
+
+    // auto smart_pointer = std::make_shared<test_structure>();
+
+    // test_structure *test = new test_structure();
+    // delete test;
+
+    // std::lock_guard<std::mutex> lck(mtx);
+    // mywrapper w;
+    // w.addfunction();
+    // std::thread first(showdq,w.d);
+    // std::thread second(showdq,w.d);
+    // first.join();
+    // second.join();
+
+send_threads();
+    return 0; 
 }
