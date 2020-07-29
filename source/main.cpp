@@ -1,6 +1,5 @@
 #include <iostream>
 #include "graph.h"
-#include "mywrapper.h"
 #include "taskmanager.h"
 #include <map>
 #include <memory>
@@ -114,18 +113,6 @@ void test_method()
     assert(shortest[0]->value == ("Madrid"));
 }
 
-void test_wrapper()
-{
-    mywrapper w;
-    // w.pushfront(1);
-    // w.pushfront(2);
-    // w.pushfront(3);
-    // w.pushfront(4);
-    // w.pushfront(5);
-    // w.removefront();
-    w.get_ioService();
-}
-
 void print_block(int n, char c)
 {
     // critical section (exclusive access to std::cout signaled by locking mtx):
@@ -149,36 +136,47 @@ void test_thread()
 bool bye = false;
 void infinite_loop_dispatcher(int i)
 {
+
     while (!bye)
     {
-
         auto resp = taskmanager::get_manager().pop_front();
         if (resp != nullptr)
         {
-            resp();
-            cout << "Thread " << i << endl;
+            std::lock_guard<std::mutex> lck(mtx);
+            resp("Your are being dispatched by thread: " + std::to_string(i));
         }
+       
     }
 }
 void something()
 {
-    cout << "hi " << endl;
+    cout << "hello thread " << endl;
 }
 
-void send_threads() {
-
+void fill_taskmanager()
+{
     //add functions in taskmanager
     taskmanager &t = taskmanager::get_manager();
-    t.push_back(something);
-    t.push_back(something);
-    t.push_back(something);
-    t.push_back(something);
-    t.push_back(something);
+    cout << "How many task do you want to fill? Insert a number" << endl;
+    int number_taskmanager = 10;
+
+    for (size_t i = 0; i < number_taskmanager; i++)
+    {
+        t.push_back([=](string additional_text){
+            cout << additional_text << " " << "Task: "<< i << endl;
+        });
+    }
+}
+
+void send_threads()
+{
+
+    fill_taskmanager();
 
     //create threads
     const auto processor_count = std::thread::hardware_concurrency();
     vector<std::thread *> thread_vector;
-    std::lock_guard<std::mutex> lck(mtx);
+
     for (size_t i = 0; i < processor_count; i++)
     {
         std::thread *th = new std::thread([i]() {
@@ -186,14 +184,13 @@ void send_threads() {
         });
         thread_vector.push_back(th);
     }
-    sleep(1);
+    sleep(3);
     bye = true;
     for (size_t i = 0; i < thread_vector.size(); i++)
     {
         thread_vector[i]->join();
         delete thread_vector[i];
     }
-
 }
 
 int main()
@@ -214,6 +211,6 @@ int main()
     // first.join();
     // second.join();
 
-send_threads();
-    return 0; 
+    send_threads();
+    return 0;
 }
